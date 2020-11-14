@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "32881227306",
+    "firebase_url": "https://univiersity.firebaseio.com",
+    "project_id": "univiersity",
+    "storage_bucket": "univiersity.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:32881227306:android:1a18e54fff8718b9a8f553",
+        "android_client_info": {
+          "package_name": "com.example.bigger_brew"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "32881227306-fu8pt1pke34256jcjtcf9n7mu3k5gq5b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjUR0huy_jTa81Njllj_nbyVKNjWBDk4M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "32881227306-fu8pt1pke34256jcjtcf9n7mu3k5gq5b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "32881227306-lpbddvig4997pcn0pel18ojjlg93obrg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.biggerBrew"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
