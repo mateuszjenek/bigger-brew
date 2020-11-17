@@ -1,8 +1,8 @@
+import 'package:auth_buttons/auth_buttons.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:bigger_brew/application/auth/auth_bloc.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bigger_brew/application/auth_form/auth_form_bloc.dart';
 import 'package:bigger_brew/presentation/routes/router.gr.dart';
@@ -112,10 +112,9 @@ class LoginForm extends StatelessWidget {
               Text("or"),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, bottom: 16.0),
-                child: GoogleSignInButton(
+                child: GoogleAuthButton(
                   darkMode: MediaQuery.of(context).platformBrightness ==
                       Brightness.dark,
-                  centered: true,
                   onPressed: () => context
                       .bloc<AuthFormBloc>()
                       .add(AuthFormEvent.signInWithGooglePressed()),

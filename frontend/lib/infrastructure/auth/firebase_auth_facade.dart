@@ -41,8 +41,8 @@ class FirebaseAuthFacade implements IAuthFacade {
             password: passwordStr,
           )
           .then((_) => right(unit));
-    } on PlatformException catch (e) {
-      if (e.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
+    } catch (e) {
+      if (e.code == 'email-already-in-use') {
         return left(const AuthFailure.emailAlreadyInUse());
       } else {
         return left(const AuthFailure.serverError());
