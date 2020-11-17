@@ -25,7 +25,6 @@ class BeersListItem extends HookWidget {
         child: Card(
           child: BlocConsumer<BeerBloc, BeerState>(
             listener: (context, state) {
-              print("isBroken: ${state.isBroken}");
               if (state.isBroken) {
                 FlushbarHelper.createError(
                   message:

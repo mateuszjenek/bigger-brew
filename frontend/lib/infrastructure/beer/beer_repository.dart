@@ -12,7 +12,7 @@ import 'package:bigger_brew/domain/beer/i_beer_repository.dart';
 @prod
 @LazySingleton(as: IBeerRepository)
 class BeerRepository implements IBeerRepository {
-  static const String _repositoryAddress = "http://192.168.1.41:8080";
+  static const String _repositoryAddress = "http://localhost";
   final IAuthFacade _authFacade;
 
   BeerRepository(this._authFacade);
@@ -113,7 +113,6 @@ class BeerRepository implements IBeerRepository {
   Future<Either<BeerFailure, Beer>> registerBeer(
       String name, String productCode, double price) async {
     var signInUser = await _authFacade.getSignedInUser();
-    print(signInUser);
     return signInUser.fold(
       () => left(BeerFailure.unexpected()),
       (user) async {
@@ -125,7 +124,6 @@ class BeerRepository implements IBeerRepository {
           body:
               '{"name": "$name", "productCode": "$productCode", "price": $price}',
         );
-        print(response.statusCode);
         if (response.statusCode == 200) {
           var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
           return right(BeerDto.fromJson(jsonResponse).toDomain());

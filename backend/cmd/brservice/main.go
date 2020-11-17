@@ -35,7 +35,7 @@ func main() {
 	controllers.Register(datastore, router)
 
 	srv := http.Server{
-		Addr:         "192.168.1.41:8080",
+		//Addr:         "192.168.1.41:8080",
 		Handler:      router,
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,

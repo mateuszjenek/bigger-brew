@@ -53,7 +53,6 @@ class BeersBloc extends Bloc<BeersEvent, BeersState> {
         );
       },
       registerBeer: (e) async* {
-        print(e);
         yield BeersState.loading();
         await repository.registerBeer(
           e.name.getOrCrash(),
