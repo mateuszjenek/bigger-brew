@@ -119,7 +119,8 @@ func (endpoint *beersEndpoints) patch(w http.ResponseWriter, r *http.Request) {
 
 	beer.Quantity += body.Change
 	if beer.Quantity < 0 {
-		beer.Quantity = 0
+		views.RenderResponse(w, http.StatusBadRequest, "quantity below 0")
+		return
 	}
 
 	err = endpoint.store.UpdateBeer(r.Context(), beer)

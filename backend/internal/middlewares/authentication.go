@@ -15,6 +15,10 @@ import (
 	"google.golang.org/api/option"
 )
 
+var whitelist = []string{
+	"/health",
+}
+
 type AuthMiddleware struct {
 	service *auth.Client
 }
@@ -34,6 +38,11 @@ func CreateAuthMiddleware() (*AuthMiddleware, error) {
 
 func (m *AuthMiddleware) Authenticate(handler http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if isEndpointWhitelisted(r.RequestURI) {
+			handler.ServeHTTP(w, r)
+			return
+		}
+
 		header := r.Header.Get("Authorization")
 		if !strings.HasPrefix(header, "Bearer ") {
 			views.RenderError(w, session.AuthenticationError())
@@ -67,4 +76,13 @@ func AdminOnly(handlerFunc http.HandlerFunc) http.HandlerFunc {
 		}
 		handlerFunc(w, r)
 	}
+}
+
+func isEndpointWhitelisted(uri string) bool {
+	for _, endpoint := range whitelist {
+		if uri == endpoint {
+			return true
+		}
+	}
+	return false
 }

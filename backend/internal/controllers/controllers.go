@@ -9,4 +9,5 @@ import (
 // Register is responsible for registration all service's endpoints
 func Register(store durable.Datastore, router *mux.Router) {
 	registerBeersEndpoints(store, router)
+	registerHealthEndponts(router)
 }
