@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bigger_brew/domain/beer/beer_repository_result.dart';
 import 'package:bigger_brew/domain/beer/value_objects.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
@@ -29,17 +30,25 @@ class BeersBloc extends Bloc<BeersEvent, BeersState> {
       fetch: (_) async* {
         yield BeersState.loading();
         var result = await repository.getAll();
-        yield result.fold(
+        yield result.value.fold(
           (failure) => BeersState.failed(failure),
-          (beers) => BeersState.loaded(beers),
+          (beers) => BeersState.loaded(
+            beers,
+            result.mode,
+            result.queuedTaskFailed,
+          ),
         );
       },
       synchronize: (e) async* {
         yield BeersState.loading();
         var result = await repository.getAll();
-        yield result.fold(
+        yield result.value.fold(
           (failure) => BeersState.failed(failure),
-          (beers) => BeersState.loaded(beers),
+          (beers) => BeersState.loaded(
+            beers,
+            result.mode,
+            result.queuedTaskFailed,
+          ),
         );
         e.completer.complete();
       },
@@ -47,9 +56,13 @@ class BeersBloc extends Bloc<BeersEvent, BeersState> {
         yield BeersState.loading();
         await repository.deleteBeer(e.beerId.getOrCrash());
         var result = await repository.getAll();
-        yield result.fold(
+        yield result.value.fold(
           (failure) => BeersState.failed(failure),
-          (beers) => BeersState.loaded(beers),
+          (beers) => BeersState.loaded(
+            beers,
+            result.mode,
+            result.queuedTaskFailed,
+          ),
         );
       },
       registerBeer: (e) async* {
@@ -60,9 +73,13 @@ class BeersBloc extends Bloc<BeersEvent, BeersState> {
           e.price.getOrCrash(),
         );
         var result = await repository.getAll();
-        yield result.fold(
+        yield result.value.fold(
           (failure) => BeersState.failed(failure),
-          (beers) => BeersState.loaded(beers),
+          (beers) => BeersState.loaded(
+            beers,
+            result.mode,
+            result.queuedTaskFailed,
+          ),
         );
       },
     );

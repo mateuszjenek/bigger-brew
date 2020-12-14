@@ -1,3 +1,5 @@
+import 'package:bigger_brew/application/network_status/network_status_bloc.dart';
+import 'package:bigger_brew/presentation/pages/home/widgets/sync_failed_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -9,7 +11,22 @@ class BeersList extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BeersBloc, BeersState>(
+    return BlocConsumer<BeersBloc, BeersState>(
+      listener: (context, state) => state.maybeMap(
+        loaded: (state) {
+          context
+              .bloc<NetworkStatusBloc>()
+              .add(NetworkStatusEvent.update(state.mode));
+
+          if (state.isAnyQueuedEventFailed) {
+            showDialog(
+              context: context,
+              child: SyncFailedDialog(),
+            );
+          }
+        },
+        orElse: () {},
+      ),
       builder: (context, state) => state.map(
         initial: (_) => Container(),
         loading: (_) => Padding(

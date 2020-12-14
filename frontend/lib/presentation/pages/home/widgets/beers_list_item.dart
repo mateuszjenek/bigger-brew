@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bigger_brew/application/beer/beer_bloc.dart';
 import 'package:bigger_brew/application/beers/beers_bloc.dart';
+import 'package:bigger_brew/application/network_status/network_status_bloc.dart';
+import 'package:bigger_brew/domain/beer/beer_repository_result.dart';
 import 'package:bigger_brew/domain/beer/i_beer_repository.dart';
+import 'package:bigger_brew/presentation/pages/home/widgets/sync_failed_dialog.dart';
 import 'package:bigger_brew/presentation/pages/item_form/item_form_page_argument.dart';
-import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -25,11 +27,25 @@ class BeersListItem extends HookWidget {
         child: Card(
           child: BlocConsumer<BeerBloc, BeerState>(
             listener: (context, state) {
+              if (state.mode != BeerRepositoryMode.UNSET) {
+                context
+                    .bloc<NetworkStatusBloc>()
+                    .add(NetworkStatusEvent.update(state.mode));
+              }
+              if (state.isAnyQueuedEventFailed) {
+                showDialog(
+                  context: context,
+                  child: SyncFailedDialog(),
+                );
+              }
               if (state.isBroken) {
-                FlushbarHelper.createError(
-                  message:
+                final snackBar = SnackBar(
+                  content: Text(
                       "Something wrong happend with beer: ${state.beer.name.getOrCrash()}. Please refresh beer list.",
-                ).show(context);
+                      style: TextStyle(color: Colors.white)),
+                  backgroundColor: Colors.red,
+                );
+                Scaffold.of(context).showSnackBar(snackBar);
               }
             },
             builder: (context, state) {

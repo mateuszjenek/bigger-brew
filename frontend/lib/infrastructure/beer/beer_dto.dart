@@ -15,6 +15,14 @@ abstract class BeerDto with _$BeerDto {
     @required int quantity,
   }) = _BeerDto;
 
+  factory BeerDto.fromDomain(Beer beer) => BeerDto(
+        id: beer.id.getOrCrash(),
+        name: beer.name.getOrCrash(),
+        productCode: beer.productCode.getOrCrash(),
+        price: beer.price.getOrCrash(),
+        quantity: beer.quantity.getOrCrash(),
+      );
+
   factory BeerDto.fromJson(Map<String, dynamic> json) =>
       _$BeerDtoFromJson(json);
 }

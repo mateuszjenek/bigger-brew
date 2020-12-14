@@ -646,9 +646,12 @@ class _$BeersStateTearOff {
   }
 
 // ignore: unused_element
-  Loaded loaded(List<Beer> beers) {
+  Loaded loaded(
+      List<Beer> beers, BeerRepositoryMode mode, bool isAnyQueuedEventFailed) {
     return Loaded(
       beers,
+      mode,
+      isAnyQueuedEventFailed,
     );
   }
 
@@ -670,14 +673,17 @@ mixin _$BeersState {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result loaded(List<Beer> beers),
+    @required
+        Result loaded(List<Beer> beers, BeerRepositoryMode mode,
+            bool isAnyQueuedEventFailed),
     @required Result failed(BeerFailure failure),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(List<Beer> beers),
+    Result loaded(
+        List<Beer> beers, BeerRepositoryMode mode, bool isAnyQueuedEventFailed),
     Result failed(BeerFailure failure),
     @required Result orElse(),
   });
@@ -758,7 +764,9 @@ class _$Inital with DiagnosticableTreeMixin implements Inital {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result loaded(List<Beer> beers),
+    @required
+        Result loaded(List<Beer> beers, BeerRepositoryMode mode,
+            bool isAnyQueuedEventFailed),
     @required Result failed(BeerFailure failure),
   }) {
     assert(initial != null);
@@ -773,7 +781,8 @@ class _$Inital with DiagnosticableTreeMixin implements Inital {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(List<Beer> beers),
+    Result loaded(
+        List<Beer> beers, BeerRepositoryMode mode, bool isAnyQueuedEventFailed),
     Result failed(BeerFailure failure),
     @required Result orElse(),
   }) {
@@ -864,7 +873,9 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result loaded(List<Beer> beers),
+    @required
+        Result loaded(List<Beer> beers, BeerRepositoryMode mode,
+            bool isAnyQueuedEventFailed),
     @required Result failed(BeerFailure failure),
   }) {
     assert(initial != null);
@@ -879,7 +890,8 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(List<Beer> beers),
+    Result loaded(
+        List<Beer> beers, BeerRepositoryMode mode, bool isAnyQueuedEventFailed),
     Result failed(BeerFailure failure),
     @required Result orElse(),
   }) {
@@ -930,7 +942,8 @@ abstract class Loading implements BeersState {
 abstract class $LoadedCopyWith<$Res> {
   factory $LoadedCopyWith(Loaded value, $Res Function(Loaded) then) =
       _$LoadedCopyWithImpl<$Res>;
-  $Res call({List<Beer> beers});
+  $Res call(
+      {List<Beer> beers, BeerRepositoryMode mode, bool isAnyQueuedEventFailed});
 }
 
 /// @nodoc
@@ -945,23 +958,36 @@ class _$LoadedCopyWithImpl<$Res> extends _$BeersStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object beers = freezed,
+    Object mode = freezed,
+    Object isAnyQueuedEventFailed = freezed,
   }) {
     return _then(Loaded(
       beers == freezed ? _value.beers : beers as List<Beer>,
+      mode == freezed ? _value.mode : mode as BeerRepositoryMode,
+      isAnyQueuedEventFailed == freezed
+          ? _value.isAnyQueuedEventFailed
+          : isAnyQueuedEventFailed as bool,
     ));
   }
 }
 
 /// @nodoc
 class _$Loaded with DiagnosticableTreeMixin implements Loaded {
-  const _$Loaded(this.beers) : assert(beers != null);
+  const _$Loaded(this.beers, this.mode, this.isAnyQueuedEventFailed)
+      : assert(beers != null),
+        assert(mode != null),
+        assert(isAnyQueuedEventFailed != null);
 
   @override
   final List<Beer> beers;
+  @override
+  final BeerRepositoryMode mode;
+  @override
+  final bool isAnyQueuedEventFailed;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BeersState.loaded(beers: $beers)';
+    return 'BeersState.loaded(beers: $beers, mode: $mode, isAnyQueuedEventFailed: $isAnyQueuedEventFailed)';
   }
 
   @override
@@ -969,7 +995,10 @@ class _$Loaded with DiagnosticableTreeMixin implements Loaded {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'BeersState.loaded'))
-      ..add(DiagnosticsProperty('beers', beers));
+      ..add(DiagnosticsProperty('beers', beers))
+      ..add(DiagnosticsProperty('mode', mode))
+      ..add(DiagnosticsProperty(
+          'isAnyQueuedEventFailed', isAnyQueuedEventFailed));
   }
 
   @override
@@ -977,12 +1006,20 @@ class _$Loaded with DiagnosticableTreeMixin implements Loaded {
     return identical(this, other) ||
         (other is Loaded &&
             (identical(other.beers, beers) ||
-                const DeepCollectionEquality().equals(other.beers, beers)));
+                const DeepCollectionEquality().equals(other.beers, beers)) &&
+            (identical(other.mode, mode) ||
+                const DeepCollectionEquality().equals(other.mode, mode)) &&
+            (identical(other.isAnyQueuedEventFailed, isAnyQueuedEventFailed) ||
+                const DeepCollectionEquality().equals(
+                    other.isAnyQueuedEventFailed, isAnyQueuedEventFailed)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(beers);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(beers) ^
+      const DeepCollectionEquality().hash(mode) ^
+      const DeepCollectionEquality().hash(isAnyQueuedEventFailed);
 
   @override
   $LoadedCopyWith<Loaded> get copyWith =>
@@ -993,14 +1030,16 @@ class _$Loaded with DiagnosticableTreeMixin implements Loaded {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result loaded(List<Beer> beers),
+    @required
+        Result loaded(List<Beer> beers, BeerRepositoryMode mode,
+            bool isAnyQueuedEventFailed),
     @required Result failed(BeerFailure failure),
   }) {
     assert(initial != null);
     assert(loading != null);
     assert(loaded != null);
     assert(failed != null);
-    return loaded(beers);
+    return loaded(beers, mode, isAnyQueuedEventFailed);
   }
 
   @override
@@ -1008,13 +1047,14 @@ class _$Loaded with DiagnosticableTreeMixin implements Loaded {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(List<Beer> beers),
+    Result loaded(
+        List<Beer> beers, BeerRepositoryMode mode, bool isAnyQueuedEventFailed),
     Result failed(BeerFailure failure),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (loaded != null) {
-      return loaded(beers);
+      return loaded(beers, mode, isAnyQueuedEventFailed);
     }
     return orElse();
   }
@@ -1052,9 +1092,12 @@ class _$Loaded with DiagnosticableTreeMixin implements Loaded {
 }
 
 abstract class Loaded implements BeersState {
-  const factory Loaded(List<Beer> beers) = _$Loaded;
+  const factory Loaded(List<Beer> beers, BeerRepositoryMode mode,
+      bool isAnyQueuedEventFailed) = _$Loaded;
 
   List<Beer> get beers;
+  BeerRepositoryMode get mode;
+  bool get isAnyQueuedEventFailed;
   $LoadedCopyWith<Loaded> get copyWith;
 }
 
@@ -1137,7 +1180,9 @@ class _$Failed with DiagnosticableTreeMixin implements Failed {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result loaded(List<Beer> beers),
+    @required
+        Result loaded(List<Beer> beers, BeerRepositoryMode mode,
+            bool isAnyQueuedEventFailed),
     @required Result failed(BeerFailure failure),
   }) {
     assert(initial != null);
@@ -1152,7 +1197,8 @@ class _$Failed with DiagnosticableTreeMixin implements Failed {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(List<Beer> beers),
+    Result loaded(
+        List<Beer> beers, BeerRepositoryMode mode, bool isAnyQueuedEventFailed),
     Result failed(BeerFailure failure),
     @required Result orElse(),
   }) {

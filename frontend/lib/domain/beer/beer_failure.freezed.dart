@@ -17,6 +17,11 @@ class _$BeerFailureTearOff {
   Unexpected unexpected() {
     return const Unexpected();
   }
+
+// ignore: unused_element
+  ServerError serverError() {
+    return const ServerError();
+  }
 }
 
 /// @nodoc
@@ -28,19 +33,23 @@ mixin _$BeerFailure {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result unexpected(),
+    @required Result serverError(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result unexpected(),
+    Result serverError(),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result unexpected(Unexpected value),
+    @required Result serverError(ServerError value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result unexpected(Unexpected value),
+    Result serverError(ServerError value),
     @required Result orElse(),
   });
 }
@@ -105,8 +114,10 @@ class _$Unexpected with DiagnosticableTreeMixin implements Unexpected {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result unexpected(),
+    @required Result serverError(),
   }) {
     assert(unexpected != null);
+    assert(serverError != null);
     return unexpected();
   }
 
@@ -114,6 +125,7 @@ class _$Unexpected with DiagnosticableTreeMixin implements Unexpected {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result unexpected(),
+    Result serverError(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -127,8 +139,10 @@ class _$Unexpected with DiagnosticableTreeMixin implements Unexpected {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result unexpected(Unexpected value),
+    @required Result serverError(ServerError value),
   }) {
     assert(unexpected != null);
+    assert(serverError != null);
     return unexpected(this);
   }
 
@@ -136,6 +150,7 @@ class _$Unexpected with DiagnosticableTreeMixin implements Unexpected {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result unexpected(Unexpected value),
+    Result serverError(ServerError value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -148,4 +163,100 @@ class _$Unexpected with DiagnosticableTreeMixin implements Unexpected {
 
 abstract class Unexpected implements BeerFailure {
   const factory Unexpected() = _$Unexpected;
+}
+
+/// @nodoc
+abstract class $ServerErrorCopyWith<$Res> {
+  factory $ServerErrorCopyWith(
+          ServerError value, $Res Function(ServerError) then) =
+      _$ServerErrorCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$ServerErrorCopyWithImpl<$Res> extends _$BeerFailureCopyWithImpl<$Res>
+    implements $ServerErrorCopyWith<$Res> {
+  _$ServerErrorCopyWithImpl(
+      ServerError _value, $Res Function(ServerError) _then)
+      : super(_value, (v) => _then(v as ServerError));
+
+  @override
+  ServerError get _value => super._value as ServerError;
+}
+
+/// @nodoc
+class _$ServerError with DiagnosticableTreeMixin implements ServerError {
+  const _$ServerError();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BeerFailure.serverError()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'BeerFailure.serverError'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is ServerError);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result unexpected(),
+    @required Result serverError(),
+  }) {
+    assert(unexpected != null);
+    assert(serverError != null);
+    return serverError();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result unexpected(),
+    Result serverError(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (serverError != null) {
+      return serverError();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result unexpected(Unexpected value),
+    @required Result serverError(ServerError value),
+  }) {
+    assert(unexpected != null);
+    assert(serverError != null);
+    return serverError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result unexpected(Unexpected value),
+    Result serverError(ServerError value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (serverError != null) {
+      return serverError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ServerError implements BeerFailure {
+  const factory ServerError() = _$ServerError;
 }

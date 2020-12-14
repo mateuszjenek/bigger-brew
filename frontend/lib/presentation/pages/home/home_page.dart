@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:bigger_brew/application/network_status/network_status_bloc.dart';
+import 'package:bigger_brew/presentation/pages/home/widgets/network_state_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -35,7 +37,12 @@ class HomePage extends StatelessWidget implements AutoRouteWrapper {
               .add(BeersEvent.synchronize(completer));
           return completer.future;
         },
-        child: BeersList(),
+        child: Column(
+          children: [
+            NetworkStateIndicator(),
+            Expanded(child: BeersList()),
+          ],
+        ),
       ),
     );
   }
@@ -45,10 +52,12 @@ class HomePage extends StatelessWidget implements AutoRouteWrapper {
     return MultiBlocProvider(
       providers: [
         BlocProvider<BeersBloc>(
-          lazy: false,
           create: (context) =>
               GetIt.instance.get<BeersBloc>()..add(const BeersEvent.fetch()),
-        )
+        ),
+        BlocProvider<NetworkStatusBloc>(
+          create: (context) => GetIt.I.get<NetworkStatusBloc>()
+        ),
       ],
       child: this,
     );

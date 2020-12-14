@@ -1,15 +1,14 @@
+import 'package:bigger_brew/domain/beer/beer.dart';
+import 'package:bigger_brew/domain/beer/beer_repository_result.dart';
 import 'package:dartz/dartz.dart';
 
-import 'beer.dart';
-import 'beer_failure.dart';
-
 abstract class IBeerRepository {
-  Future<Either<BeerFailure, List<Beer>>> getAll();
-  Future<Either<BeerFailure, Beer>> updateQuantity(
+  Future<BeerRepositoryResult<List<Beer>>> getAll();
+  Future<BeerRepositoryResult<Beer>> updateQuantity(
       int beerId, int quantityChange);
-  Future<Either<BeerFailure, Unit>> deleteBeer(int beerId);
-  Future<Either<BeerFailure, Beer>> updateBeer(
+  Future<BeerRepositoryResult<Unit>> deleteBeer(int beerId);
+  Future<BeerRepositoryResult<Beer>> updateBeer(
       int beerId, String name, String productCode, double price);
-  Future<Either<BeerFailure, Beer>> registerBeer(
+  Future<BeerRepositoryResult<Beer>> registerBeer(
       String name, String productCode, double price);
 }

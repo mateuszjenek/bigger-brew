@@ -555,12 +555,16 @@ class _$BeerStateTearOff {
       {@required int changeValue,
       @required bool isUpdating,
       @required Beer beer,
-      @required bool isBroken}) {
+      @required bool isBroken,
+      @required BeerRepositoryMode mode,
+      @required bool isAnyQueuedEventFailed}) {
     return _BeerState(
       changeValue: changeValue,
       isUpdating: isUpdating,
       beer: beer,
       isBroken: isBroken,
+      mode: mode,
+      isAnyQueuedEventFailed: isAnyQueuedEventFailed,
     );
   }
 }
@@ -575,6 +579,8 @@ mixin _$BeerState {
   bool get isUpdating;
   Beer get beer;
   bool get isBroken;
+  BeerRepositoryMode get mode;
+  bool get isAnyQueuedEventFailed;
 
   $BeerStateCopyWith<BeerState> get copyWith;
 }
@@ -583,7 +589,13 @@ mixin _$BeerState {
 abstract class $BeerStateCopyWith<$Res> {
   factory $BeerStateCopyWith(BeerState value, $Res Function(BeerState) then) =
       _$BeerStateCopyWithImpl<$Res>;
-  $Res call({int changeValue, bool isUpdating, Beer beer, bool isBroken});
+  $Res call(
+      {int changeValue,
+      bool isUpdating,
+      Beer beer,
+      bool isBroken,
+      BeerRepositoryMode mode,
+      bool isAnyQueuedEventFailed});
 
   $BeerCopyWith<$Res> get beer;
 }
@@ -602,6 +614,8 @@ class _$BeerStateCopyWithImpl<$Res> implements $BeerStateCopyWith<$Res> {
     Object isUpdating = freezed,
     Object beer = freezed,
     Object isBroken = freezed,
+    Object mode = freezed,
+    Object isAnyQueuedEventFailed = freezed,
   }) {
     return _then(_value.copyWith(
       changeValue:
@@ -610,6 +624,10 @@ class _$BeerStateCopyWithImpl<$Res> implements $BeerStateCopyWith<$Res> {
           isUpdating == freezed ? _value.isUpdating : isUpdating as bool,
       beer: beer == freezed ? _value.beer : beer as Beer,
       isBroken: isBroken == freezed ? _value.isBroken : isBroken as bool,
+      mode: mode == freezed ? _value.mode : mode as BeerRepositoryMode,
+      isAnyQueuedEventFailed: isAnyQueuedEventFailed == freezed
+          ? _value.isAnyQueuedEventFailed
+          : isAnyQueuedEventFailed as bool,
     ));
   }
 
@@ -630,7 +648,13 @@ abstract class _$BeerStateCopyWith<$Res> implements $BeerStateCopyWith<$Res> {
           _BeerState value, $Res Function(_BeerState) then) =
       __$BeerStateCopyWithImpl<$Res>;
   @override
-  $Res call({int changeValue, bool isUpdating, Beer beer, bool isBroken});
+  $Res call(
+      {int changeValue,
+      bool isUpdating,
+      Beer beer,
+      bool isBroken,
+      BeerRepositoryMode mode,
+      bool isAnyQueuedEventFailed});
 
   @override
   $BeerCopyWith<$Res> get beer;
@@ -651,6 +675,8 @@ class __$BeerStateCopyWithImpl<$Res> extends _$BeerStateCopyWithImpl<$Res>
     Object isUpdating = freezed,
     Object beer = freezed,
     Object isBroken = freezed,
+    Object mode = freezed,
+    Object isAnyQueuedEventFailed = freezed,
   }) {
     return _then(_BeerState(
       changeValue:
@@ -659,6 +685,10 @@ class __$BeerStateCopyWithImpl<$Res> extends _$BeerStateCopyWithImpl<$Res>
           isUpdating == freezed ? _value.isUpdating : isUpdating as bool,
       beer: beer == freezed ? _value.beer : beer as Beer,
       isBroken: isBroken == freezed ? _value.isBroken : isBroken as bool,
+      mode: mode == freezed ? _value.mode : mode as BeerRepositoryMode,
+      isAnyQueuedEventFailed: isAnyQueuedEventFailed == freezed
+          ? _value.isAnyQueuedEventFailed
+          : isAnyQueuedEventFailed as bool,
     ));
   }
 }
@@ -669,11 +699,15 @@ class _$_BeerState implements _BeerState {
       {@required this.changeValue,
       @required this.isUpdating,
       @required this.beer,
-      @required this.isBroken})
+      @required this.isBroken,
+      @required this.mode,
+      @required this.isAnyQueuedEventFailed})
       : assert(changeValue != null),
         assert(isUpdating != null),
         assert(beer != null),
-        assert(isBroken != null);
+        assert(isBroken != null),
+        assert(mode != null),
+        assert(isAnyQueuedEventFailed != null);
 
   @override
   final int changeValue;
@@ -683,10 +717,14 @@ class _$_BeerState implements _BeerState {
   final Beer beer;
   @override
   final bool isBroken;
+  @override
+  final BeerRepositoryMode mode;
+  @override
+  final bool isAnyQueuedEventFailed;
 
   @override
   String toString() {
-    return 'BeerState(changeValue: $changeValue, isUpdating: $isUpdating, beer: $beer, isBroken: $isBroken)';
+    return 'BeerState(changeValue: $changeValue, isUpdating: $isUpdating, beer: $beer, isBroken: $isBroken, mode: $mode, isAnyQueuedEventFailed: $isAnyQueuedEventFailed)';
   }
 
   @override
@@ -703,7 +741,12 @@ class _$_BeerState implements _BeerState {
                 const DeepCollectionEquality().equals(other.beer, beer)) &&
             (identical(other.isBroken, isBroken) ||
                 const DeepCollectionEquality()
-                    .equals(other.isBroken, isBroken)));
+                    .equals(other.isBroken, isBroken)) &&
+            (identical(other.mode, mode) ||
+                const DeepCollectionEquality().equals(other.mode, mode)) &&
+            (identical(other.isAnyQueuedEventFailed, isAnyQueuedEventFailed) ||
+                const DeepCollectionEquality().equals(
+                    other.isAnyQueuedEventFailed, isAnyQueuedEventFailed)));
   }
 
   @override
@@ -712,7 +755,9 @@ class _$_BeerState implements _BeerState {
       const DeepCollectionEquality().hash(changeValue) ^
       const DeepCollectionEquality().hash(isUpdating) ^
       const DeepCollectionEquality().hash(beer) ^
-      const DeepCollectionEquality().hash(isBroken);
+      const DeepCollectionEquality().hash(isBroken) ^
+      const DeepCollectionEquality().hash(mode) ^
+      const DeepCollectionEquality().hash(isAnyQueuedEventFailed);
 
   @override
   _$BeerStateCopyWith<_BeerState> get copyWith =>
@@ -724,7 +769,9 @@ abstract class _BeerState implements BeerState {
       {@required int changeValue,
       @required bool isUpdating,
       @required Beer beer,
-      @required bool isBroken}) = _$_BeerState;
+      @required bool isBroken,
+      @required BeerRepositoryMode mode,
+      @required bool isAnyQueuedEventFailed}) = _$_BeerState;
 
   @override
   int get changeValue;
@@ -734,6 +781,10 @@ abstract class _BeerState implements BeerState {
   Beer get beer;
   @override
   bool get isBroken;
+  @override
+  BeerRepositoryMode get mode;
+  @override
+  bool get isAnyQueuedEventFailed;
   @override
   _$BeerStateCopyWith<_BeerState> get copyWith;
 }

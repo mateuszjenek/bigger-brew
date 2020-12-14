@@ -6,6 +6,7 @@ import 'package:bigger_brew/infrastructure/configuration/configuration_dto.dart'
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+@prod
 @LazySingleton(as: IConfigurationRepository)
 class ConfigurationRepository implements IConfigurationRepository {
   @override

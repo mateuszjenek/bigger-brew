@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:bigger_brew/domain/beer/beer_repository_result.dart';
 import 'package:bigger_brew/domain/configuration/I_configuration_repository.dart';
 import 'package:bigger_brew/domain/configuration/configuration.dart';
 import 'package:bloc/bloc.dart';

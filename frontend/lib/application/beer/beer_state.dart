@@ -7,6 +7,8 @@ abstract class BeerState with _$BeerState {
     @required bool isUpdating,
     @required Beer beer,
     @required bool isBroken,
+    @required BeerRepositoryMode mode,
+    @required bool isAnyQueuedEventFailed,
   }) = _BeerState;
 
   factory BeerState.initial(Beer beer) => BeerState(
@@ -14,5 +16,7 @@ abstract class BeerState with _$BeerState {
         isUpdating: false,
         beer: beer,
         isBroken: false,
+        mode: BeerRepositoryMode.UNSET,
+        isAnyQueuedEventFailed: false,
       );
 }

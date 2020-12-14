@@ -1,11 +1,15 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:bigger_brew/application/auth/auth_bloc.dart';
 import 'package:bigger_brew/application/beers/beers_bloc.dart';
+import 'package:bigger_brew/application/options/options_bloc.dart';
 import 'package:bigger_brew/domain/auth/value_objects.dart';
 import 'package:bigger_brew/presentation/pages/item_form/item_form_page_argument.dart';
 import 'package:bigger_brew/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 class ProfilePage extends StatelessWidget {
   final BeersBloc _beersBloc;
@@ -69,22 +73,51 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 18),
-                ListTile(
-                  leading: Icon(Icons.app_registration),
-                  title: Text("Register new product"),
-                  onTap: () => ExtendedNavigator.of(context).push(
-                    Routes.itemFormPage,
-                    arguments: ItemFormPageArguments(
-                      arguments: ItemFormPageArgument.newBeer(_beersBloc),
+                BlocProvider<OptionsBloc>(
+                  create: (context) => GetIt.I.get<OptionsBloc>()
+                    ..add(OptionsEvent.getConfiguration()),
+                  child: BlocConsumer<OptionsBloc, OptionsState>(
+                    listener: (context, state) => state.map(
+                      loading: (_) {},
+                      loaded: (_) => _beersBloc
+                          .add(BeersEvent.synchronize(Completer<void>())),
+                    ),
+                    builder: (context, state) => state.map(
+                      loading: (state) =>
+                          Center(child: CircularProgressIndicator()),
+                      loaded: (state) => Column(
+                        children: [
+                          ListTile(
+                            //leading: Icon(Icons.app_registration),
+                            title: Text("Register new product"),
+                            onTap: () => ExtendedNavigator.of(context).push(
+                              Routes.itemFormPage,
+                              arguments: ItemFormPageArguments(
+                                arguments:
+                                    ItemFormPageArgument.newBeer(_beersBloc),
+                              ),
+                            ),
+                          ),
+                          Divider(),
+                          SwitchListTile(
+                            title: Text("Offline mode"),
+                            value: state.configuration.isOfflineMode,
+                            onChanged: (value) =>
+                                BlocProvider.of<OptionsBloc>(context)
+                                    .add(OptionsEvent.changeNetworkMode(value)),
+                          ),
+                          Divider(),
+                          ListTile(
+                            //leading: Icon(Icons.exit_to_app),
+                            title: Text("Logout"),
+                            onTap: () => context
+                                .bloc<AuthBloc>()
+                                .add(const AuthEvent.signedOut()),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Divider(),
-                ListTile(
-                  leading: Icon(Icons.exit_to_app),
-                  title: Text("Logout"),
-                  onTap: () =>
-                      context.bloc<AuthBloc>().add(const AuthEvent.signedOut()),
                 ),
               ],
             ),
