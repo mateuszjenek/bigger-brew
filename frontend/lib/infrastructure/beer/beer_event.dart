@@ -11,6 +11,7 @@ abstract class BeerEvent with _$BeerEvent {
   ) = DeleteBeer;
   const factory BeerEvent.registerBeer(
     int timestamp,
+    int id,
     String name,
     String productCode,
     double price,

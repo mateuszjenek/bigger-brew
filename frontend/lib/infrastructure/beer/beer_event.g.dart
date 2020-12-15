@@ -22,6 +22,7 @@ Map<String, dynamic> _$_$DeleteBeerToJson(_$DeleteBeer instance) =>
 _$RegisterBeer _$_$RegisterBeerFromJson(Map<String, dynamic> json) {
   return _$RegisterBeer(
     json['timestamp'] as int,
+    json['id'] as int,
     json['name'] as String,
     json['productCode'] as String,
     (json['price'] as num)?.toDouble(),
@@ -31,6 +32,7 @@ _$RegisterBeer _$_$RegisterBeerFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$_$RegisterBeerToJson(_$RegisterBeer instance) =>
     <String, dynamic>{
       'timestamp': instance.timestamp,
+      'id': instance.id,
       'name': instance.name,
       'productCode': instance.productCode,
       'price': instance.price,

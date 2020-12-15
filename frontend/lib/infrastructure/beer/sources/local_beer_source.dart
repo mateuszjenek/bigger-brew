@@ -64,6 +64,7 @@ class LocalBeerSource implements IBeerSource {
     if (!withoutQueue)
       await _eventQueue.push(BeerEvent.registerBeer(
         DateTime.now().millisecondsSinceEpoch,
+        lastID + 1,
         name,
         productCode,
         price,

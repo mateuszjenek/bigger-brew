@@ -38,9 +38,10 @@ class _$BeerEventTearOff {
 
 // ignore: unused_element
   RegisterBeer registerBeer(
-      int timestamp, String name, String productCode, double price) {
+      int timestamp, int id, String name, String productCode, double price) {
     return RegisterBeer(
       timestamp,
+      id,
       name,
       productCode,
       price,
@@ -86,8 +87,8 @@ mixin _$BeerEvent {
   Result when<Result extends Object>({
     @required Result deleteBeer(int timestamp, int beerId),
     @required
-        Result registerBeer(
-            int timestamp, String name, String productCode, double price),
+        Result registerBeer(int timestamp, int id, String name,
+            String productCode, double price),
     @required
         Result updateBeer(int timestamp, int beerId, String name,
             String productCode, double price),
@@ -98,7 +99,7 @@ mixin _$BeerEvent {
   Result maybeWhen<Result extends Object>({
     Result deleteBeer(int timestamp, int beerId),
     Result registerBeer(
-        int timestamp, String name, String productCode, double price),
+        int timestamp, int id, String name, String productCode, double price),
     Result updateBeer(int timestamp, int beerId, String name,
         String productCode, double price),
     Result updateQuantity(int timestamp, int beerId, int quantityChange),
@@ -225,8 +226,8 @@ class _$DeleteBeer implements DeleteBeer {
   Result when<Result extends Object>({
     @required Result deleteBeer(int timestamp, int beerId),
     @required
-        Result registerBeer(
-            int timestamp, String name, String productCode, double price),
+        Result registerBeer(int timestamp, int id, String name,
+            String productCode, double price),
     @required
         Result updateBeer(int timestamp, int beerId, String name,
             String productCode, double price),
@@ -245,7 +246,7 @@ class _$DeleteBeer implements DeleteBeer {
   Result maybeWhen<Result extends Object>({
     Result deleteBeer(int timestamp, int beerId),
     Result registerBeer(
-        int timestamp, String name, String productCode, double price),
+        int timestamp, int id, String name, String productCode, double price),
     Result updateBeer(int timestamp, int beerId, String name,
         String productCode, double price),
     Result updateQuantity(int timestamp, int beerId, int quantityChange),
@@ -314,7 +315,8 @@ abstract class $RegisterBeerCopyWith<$Res> implements $BeerEventCopyWith<$Res> {
           RegisterBeer value, $Res Function(RegisterBeer) then) =
       _$RegisterBeerCopyWithImpl<$Res>;
   @override
-  $Res call({int timestamp, String name, String productCode, double price});
+  $Res call(
+      {int timestamp, int id, String name, String productCode, double price});
 }
 
 /// @nodoc
@@ -330,12 +332,14 @@ class _$RegisterBeerCopyWithImpl<$Res> extends _$BeerEventCopyWithImpl<$Res>
   @override
   $Res call({
     Object timestamp = freezed,
+    Object id = freezed,
     Object name = freezed,
     Object productCode = freezed,
     Object price = freezed,
   }) {
     return _then(RegisterBeer(
       timestamp == freezed ? _value.timestamp : timestamp as int,
+      id == freezed ? _value.id : id as int,
       name == freezed ? _value.name : name as String,
       productCode == freezed ? _value.productCode : productCode as String,
       price == freezed ? _value.price : price as double,
@@ -347,8 +351,10 @@ class _$RegisterBeerCopyWithImpl<$Res> extends _$BeerEventCopyWithImpl<$Res>
 
 /// @nodoc
 class _$RegisterBeer implements RegisterBeer {
-  const _$RegisterBeer(this.timestamp, this.name, this.productCode, this.price)
+  const _$RegisterBeer(
+      this.timestamp, this.id, this.name, this.productCode, this.price)
       : assert(timestamp != null),
+        assert(id != null),
         assert(name != null),
         assert(productCode != null),
         assert(price != null);
@@ -359,6 +365,8 @@ class _$RegisterBeer implements RegisterBeer {
   @override
   final int timestamp;
   @override
+  final int id;
+  @override
   final String name;
   @override
   final String productCode;
@@ -367,7 +375,7 @@ class _$RegisterBeer implements RegisterBeer {
 
   @override
   String toString() {
-    return 'BeerEvent.registerBeer(timestamp: $timestamp, name: $name, productCode: $productCode, price: $price)';
+    return 'BeerEvent.registerBeer(timestamp: $timestamp, id: $id, name: $name, productCode: $productCode, price: $price)';
   }
 
   @override
@@ -377,6 +385,8 @@ class _$RegisterBeer implements RegisterBeer {
             (identical(other.timestamp, timestamp) ||
                 const DeepCollectionEquality()
                     .equals(other.timestamp, timestamp)) &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.productCode, productCode) ||
@@ -390,6 +400,7 @@ class _$RegisterBeer implements RegisterBeer {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(timestamp) ^
+      const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(productCode) ^
       const DeepCollectionEquality().hash(price);
@@ -403,8 +414,8 @@ class _$RegisterBeer implements RegisterBeer {
   Result when<Result extends Object>({
     @required Result deleteBeer(int timestamp, int beerId),
     @required
-        Result registerBeer(
-            int timestamp, String name, String productCode, double price),
+        Result registerBeer(int timestamp, int id, String name,
+            String productCode, double price),
     @required
         Result updateBeer(int timestamp, int beerId, String name,
             String productCode, double price),
@@ -415,7 +426,7 @@ class _$RegisterBeer implements RegisterBeer {
     assert(registerBeer != null);
     assert(updateBeer != null);
     assert(updateQuantity != null);
-    return registerBeer(timestamp, name, productCode, price);
+    return registerBeer(timestamp, id, name, productCode, price);
   }
 
   @override
@@ -423,7 +434,7 @@ class _$RegisterBeer implements RegisterBeer {
   Result maybeWhen<Result extends Object>({
     Result deleteBeer(int timestamp, int beerId),
     Result registerBeer(
-        int timestamp, String name, String productCode, double price),
+        int timestamp, int id, String name, String productCode, double price),
     Result updateBeer(int timestamp, int beerId, String name,
         String productCode, double price),
     Result updateQuantity(int timestamp, int beerId, int quantityChange),
@@ -431,7 +442,7 @@ class _$RegisterBeer implements RegisterBeer {
   }) {
     assert(orElse != null);
     if (registerBeer != null) {
-      return registerBeer(timestamp, name, productCode, price);
+      return registerBeer(timestamp, id, name, productCode, price);
     }
     return orElse();
   }
@@ -474,15 +485,15 @@ class _$RegisterBeer implements RegisterBeer {
 }
 
 abstract class RegisterBeer implements BeerEvent {
-  const factory RegisterBeer(
-          int timestamp, String name, String productCode, double price) =
-      _$RegisterBeer;
+  const factory RegisterBeer(int timestamp, int id, String name,
+      String productCode, double price) = _$RegisterBeer;
 
   factory RegisterBeer.fromJson(Map<String, dynamic> json) =
       _$RegisterBeer.fromJson;
 
   @override
   int get timestamp;
+  int get id;
   String get name;
   String get productCode;
   double get price;
@@ -598,8 +609,8 @@ class _$UpdateBeer implements UpdateBeer {
   Result when<Result extends Object>({
     @required Result deleteBeer(int timestamp, int beerId),
     @required
-        Result registerBeer(
-            int timestamp, String name, String productCode, double price),
+        Result registerBeer(int timestamp, int id, String name,
+            String productCode, double price),
     @required
         Result updateBeer(int timestamp, int beerId, String name,
             String productCode, double price),
@@ -618,7 +629,7 @@ class _$UpdateBeer implements UpdateBeer {
   Result maybeWhen<Result extends Object>({
     Result deleteBeer(int timestamp, int beerId),
     Result registerBeer(
-        int timestamp, String name, String productCode, double price),
+        int timestamp, int id, String name, String productCode, double price),
     Result updateBeer(int timestamp, int beerId, String name,
         String productCode, double price),
     Result updateQuantity(int timestamp, int beerId, int quantityChange),
@@ -773,8 +784,8 @@ class _$UpdateQunatity implements UpdateQunatity {
   Result when<Result extends Object>({
     @required Result deleteBeer(int timestamp, int beerId),
     @required
-        Result registerBeer(
-            int timestamp, String name, String productCode, double price),
+        Result registerBeer(int timestamp, int id, String name,
+            String productCode, double price),
     @required
         Result updateBeer(int timestamp, int beerId, String name,
             String productCode, double price),
@@ -793,7 +804,7 @@ class _$UpdateQunatity implements UpdateQunatity {
   Result maybeWhen<Result extends Object>({
     Result deleteBeer(int timestamp, int beerId),
     Result registerBeer(
-        int timestamp, String name, String productCode, double price),
+        int timestamp, int id, String name, String productCode, double price),
     Result updateBeer(int timestamp, int beerId, String name,
         String productCode, double price),
     Result updateQuantity(int timestamp, int beerId, int quantityChange),

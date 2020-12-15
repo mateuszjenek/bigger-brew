@@ -88,11 +88,14 @@ class BeerRepository implements IBeerRepository {
 
   Future<bool> _performAllQueuedEvents() async {
     var isAnyEventFailed = false;
+    var updatedIDs = Map<int, int>();
     var events = await _eventQueue.popAll();
     for (var event in events) {
       await event.map(
         deleteBeer: (event) async {
-          var result = await _remoteBeerSource.deleteBeer(event.beerId);
+          var beerId = event.beerId;
+          if (updatedIDs.containsKey(beerId)) beerId = updatedIDs[beerId];
+          var result = await _remoteBeerSource.deleteBeer(beerId);
           if (result.isLeft()) isAnyEventFailed = true;
         },
         registerBeer: (event) async {
@@ -101,11 +104,20 @@ class BeerRepository implements IBeerRepository {
             event.productCode,
             event.price,
           );
-          if (result.isLeft()) isAnyEventFailed = true;
+          result.fold(
+            (_) {
+              isAnyEventFailed = true;
+            },
+            (beer) {
+              updatedIDs[event.id] = beer.id.getOrCrash();
+            },
+          );
         },
         updateBeer: (event) async {
+          var beerId = event.beerId;
+          if (updatedIDs.containsKey(beerId)) beerId = updatedIDs[beerId];
           var result = await _remoteBeerSource.updateBeer(
-            event.beerId,
+            beerId,
             event.name,
             event.productCode,
             event.price,
@@ -113,8 +125,10 @@ class BeerRepository implements IBeerRepository {
           if (result.isLeft()) isAnyEventFailed = true;
         },
         updateQuantity: (event) async {
+          var beerId = event.beerId;
+          if (updatedIDs.containsKey(beerId)) beerId = updatedIDs[beerId];
           var result = await _remoteBeerSource.updateQuantity(
-            event.beerId,
+            beerId,
             event.quantityChange,
           );
           if (result.isLeft()) isAnyEventFailed = true;
