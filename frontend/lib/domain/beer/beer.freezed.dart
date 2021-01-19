@@ -19,13 +19,15 @@ class _$BeerTearOff {
       @required BeerName name,
       @required ProductCode productCode,
       @required Quantity quantity,
-      @required Price price}) {
+      @required Price price,
+      @required List<String> photos}) {
     return _Beer(
       id: id,
       name: name,
       productCode: productCode,
       quantity: quantity,
       price: price,
+      photos: photos,
     );
   }
 }
@@ -41,6 +43,7 @@ mixin _$Beer {
   ProductCode get productCode;
   Quantity get quantity;
   Price get price;
+  List<String> get photos;
 
   $BeerCopyWith<Beer> get copyWith;
 }
@@ -54,7 +57,8 @@ abstract class $BeerCopyWith<$Res> {
       BeerName name,
       ProductCode productCode,
       Quantity quantity,
-      Price price});
+      Price price,
+      List<String> photos});
 }
 
 /// @nodoc
@@ -72,6 +76,7 @@ class _$BeerCopyWithImpl<$Res> implements $BeerCopyWith<$Res> {
     Object productCode = freezed,
     Object quantity = freezed,
     Object price = freezed,
+    Object photos = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as ID,
@@ -81,6 +86,7 @@ class _$BeerCopyWithImpl<$Res> implements $BeerCopyWith<$Res> {
           : productCode as ProductCode,
       quantity: quantity == freezed ? _value.quantity : quantity as Quantity,
       price: price == freezed ? _value.price : price as Price,
+      photos: photos == freezed ? _value.photos : photos as List<String>,
     ));
   }
 }
@@ -95,7 +101,8 @@ abstract class _$BeerCopyWith<$Res> implements $BeerCopyWith<$Res> {
       BeerName name,
       ProductCode productCode,
       Quantity quantity,
-      Price price});
+      Price price,
+      List<String> photos});
 }
 
 /// @nodoc
@@ -114,6 +121,7 @@ class __$BeerCopyWithImpl<$Res> extends _$BeerCopyWithImpl<$Res>
     Object productCode = freezed,
     Object quantity = freezed,
     Object price = freezed,
+    Object photos = freezed,
   }) {
     return _then(_Beer(
       id: id == freezed ? _value.id : id as ID,
@@ -123,6 +131,7 @@ class __$BeerCopyWithImpl<$Res> extends _$BeerCopyWithImpl<$Res>
           : productCode as ProductCode,
       quantity: quantity == freezed ? _value.quantity : quantity as Quantity,
       price: price == freezed ? _value.price : price as Price,
+      photos: photos == freezed ? _value.photos : photos as List<String>,
     ));
   }
 }
@@ -134,12 +143,14 @@ class _$_Beer implements _Beer {
       @required this.name,
       @required this.productCode,
       @required this.quantity,
-      @required this.price})
+      @required this.price,
+      @required this.photos})
       : assert(id != null),
         assert(name != null),
         assert(productCode != null),
         assert(quantity != null),
-        assert(price != null);
+        assert(price != null),
+        assert(photos != null);
 
   @override
   final ID id;
@@ -151,10 +162,12 @@ class _$_Beer implements _Beer {
   final Quantity quantity;
   @override
   final Price price;
+  @override
+  final List<String> photos;
 
   @override
   String toString() {
-    return 'Beer(id: $id, name: $name, productCode: $productCode, quantity: $quantity, price: $price)';
+    return 'Beer(id: $id, name: $name, productCode: $productCode, quantity: $quantity, price: $price, photos: $photos)';
   }
 
   @override
@@ -172,7 +185,9 @@ class _$_Beer implements _Beer {
                 const DeepCollectionEquality()
                     .equals(other.quantity, quantity)) &&
             (identical(other.price, price) ||
-                const DeepCollectionEquality().equals(other.price, price)));
+                const DeepCollectionEquality().equals(other.price, price)) &&
+            (identical(other.photos, photos) ||
+                const DeepCollectionEquality().equals(other.photos, photos)));
   }
 
   @override
@@ -182,7 +197,8 @@ class _$_Beer implements _Beer {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(productCode) ^
       const DeepCollectionEquality().hash(quantity) ^
-      const DeepCollectionEquality().hash(price);
+      const DeepCollectionEquality().hash(price) ^
+      const DeepCollectionEquality().hash(photos);
 
   @override
   _$BeerCopyWith<_Beer> get copyWith =>
@@ -195,7 +211,8 @@ abstract class _Beer implements Beer {
       @required BeerName name,
       @required ProductCode productCode,
       @required Quantity quantity,
-      @required Price price}) = _$_Beer;
+      @required Price price,
+      @required List<String> photos}) = _$_Beer;
 
   @override
   ID get id;
@@ -207,6 +224,8 @@ abstract class _Beer implements Beer {
   Quantity get quantity;
   @override
   Price get price;
+  @override
+  List<String> get photos;
   @override
   _$BeerCopyWith<_Beer> get copyWith;
 }

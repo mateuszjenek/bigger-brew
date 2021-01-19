@@ -40,7 +40,7 @@ class LocalBeerSource implements IBeerSource {
 
   @override
   Future<Either<BeerFailure, Beer>> registerBeer(
-      String name, String productCode, double price,
+      String name, String productCode, double price, List<String> photos,
       {bool withoutQueue = false}) async {
     if (price < 0) return left(BeerFailure.serverError());
 
@@ -58,7 +58,8 @@ class LocalBeerSource implements IBeerSource {
         name: BeerName(name),
         productCode: ProductCode(productCode),
         price: Price(price),
-        quantity: Quantity(0));
+        quantity: Quantity(0),
+        photos: photos);
     beers.add(beer);
     await updateFromLocal(beers);
     if (!withoutQueue)
@@ -68,13 +69,14 @@ class LocalBeerSource implements IBeerSource {
         name,
         productCode,
         price,
+        photos,
       ));
     return right(beer);
   }
 
   @override
-  Future<Either<BeerFailure, Beer>> updateBeer(
-      int beerId, String name, String productCode, double price,
+  Future<Either<BeerFailure, Beer>> updateBeer(int beerId, String name,
+      String productCode, double price, List<String> photos,
       {bool withoutQueue = false}) async {
     if (price < 0) return left(BeerFailure.serverError());
     var beers = await getFromLocal();
@@ -84,6 +86,7 @@ class LocalBeerSource implements IBeerSource {
       name: BeerName(name),
       productCode: ProductCode(productCode),
       price: Price(price),
+      photos: photos,
     );
     beers.add(beer);
     await updateFromLocal(beers);
@@ -94,6 +97,7 @@ class LocalBeerSource implements IBeerSource {
         name,
         productCode,
         price,
+        photos,
       ));
     return right(beer);
   }

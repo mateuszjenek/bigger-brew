@@ -11,12 +11,18 @@ import (
 )
 
 const (
-	queryCreateTableBeer = "CREATE TABLE IF NOT EXISTS beer (id INTEGER PRIMARY KEY AUTOINCREMENT, product_code VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, quantity INTEGER NOT NULL, price FLOAT NOT NULL)"
-	queryInsertBeer      = "INSERT INTO beer (product_code, name, quantity, price) VALUES ($1, $2, $3, $4)"
-	querySelectBeerByID  = "SELECT id, product_code, name, quantity, price FROM beer WHERE id = $1"
-	querySelectBeer      = "SELECT id, product_code, name, quantity, price FROM beer"
-	queryUpdateBeer      = "UPDATE beer SET product_code = $1, name = $2, quantity = $3, price = $4 WHERE id = $5"
-	queryDeleteBeer      = "DELETE FROM beer WHERE id = $1"
+	queryCreateTableBeer      = "CREATE TABLE IF NOT EXISTS beer (id INTEGER PRIMARY KEY AUTOINCREMENT, product_code VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, quantity INTEGER NOT NULL, price FLOAT NOT NULL)"
+	queryCreateTableBeerPhoto = "CREATE TABLE IF NOT EXISTS	beer_photo (id INTEGER PRIMARY KEY AUTOINCREMENT, beer INTEGER, url VARCHAR(255))"
+
+	queryInsertBeer     = "INSERT INTO beer (product_code, name, quantity, price) VALUES ($1, $2, $3, $4)"
+	querySelectBeerByID = "SELECT id, product_code, name, quantity, price FROM beer WHERE id = $1"
+	querySelectBeer     = "SELECT id, product_code, name, quantity, price FROM beer"
+	queryUpdateBeer     = "UPDATE beer SET product_code = $1, name = $2, quantity = $3, price = $4 WHERE id = $5"
+	queryDeleteBeer     = "DELETE FROM beer WHERE id = $1"
+
+	querySelectBeerPhotos = "SELECT url FROM beer_photo WHERE beer = $1"
+	queryDeleteBeerPhotos = "DELETE FROM beer_photo WHERE beer = $1"
+	queryAddBeerPhoto     = "INSERT INTO beer_photo (beer, url) VALUES ($1, $2)"
 )
 
 type BeersStore interface {
@@ -29,6 +35,10 @@ type BeersStore interface {
 
 func (s *store) createBeersStore() error {
 	_, err := s.db.Exec(queryCreateTableBeer)
+	if err != nil {
+		return fmt.Errorf("error while creating beer table in database: %v", err)
+	}
+	_, err = s.db.Exec(queryCreateTableBeerPhoto)
 	if err != nil {
 		return fmt.Errorf("error while creating beer table in database: %v", err)
 	}
@@ -54,6 +64,20 @@ func (s *store) GetBeers(ctx context.Context) ([]*models.Beer, error) {
 		beers = append(beers, beer)
 	}
 
+	for _, beer := range beers {
+		var photos []string
+		photosRow, err := s.db.Query(querySelectBeerPhotos, beer.ID)
+		for photosRow.Next() {
+			var photo string
+			err = photosRow.Scan(&photo)
+			if err != nil {
+				return nil, fmt.Errorf("error while scanning row: %v", err)
+			}
+			photos = append(photos, photo)
+		}
+		beer.Photos = photos
+	}
+
 	return beers, nil
 }
 
@@ -64,6 +88,19 @@ func (s *store) GetBeer(ctx context.Context, id int) (*models.Beer, error) {
 	if err != nil {
 		return nil, fmt.Errorf("error while scanning row: %v", err)
 	}
+
+	var photos []string
+	photosRow, err := s.db.Query(querySelectBeerPhotos, beer.ID)
+	for photosRow.Next() {
+		var photo string
+		err = photosRow.Scan(&photo)
+		if err != nil {
+			return nil, fmt.Errorf("error while scanning row: %v", err)
+		}
+		photos = append(photos, photo)
+	}
+	beer.Photos = photos
+
 	return beer, nil
 }
 
@@ -82,6 +119,17 @@ func (s *store) RegisterBeer(ctx context.Context, beer *models.Beer) (*models.Be
 	}
 	session.Logger(ctx).WithField("rowsAffected", rowsAffected).Info("Succesfully added beer to database")
 
+	_, err = s.db.Exec(queryDeleteBeerPhotos, beer.ID)
+	if err != nil {
+		return nil, fmt.Errorf("error while inserting beer photo to table beer_photo: %v", err)
+	}
+	for _, photo := range beer.Photos {
+		_, err = s.db.Exec(queryAddBeerPhoto, id, photo)
+		if err != nil {
+			return nil, fmt.Errorf("error while inserting beer photo to table beer_photo: %v", err)
+		}
+	}
+
 	return s.GetBeer(ctx, int(id))
 }
 
@@ -95,6 +143,18 @@ func (s *store) UpdateBeer(ctx context.Context, beer *models.Beer) error {
 		return fmt.Errorf("error while getting number of affected rows: %v", err)
 	}
 	session.Logger(ctx).WithField("rowsAffected", rowsAffected).Debug("Succesfully updated beer in database")
+
+	_, err = s.db.Exec(queryDeleteBeerPhotos, beer.ID)
+	if err != nil {
+		return fmt.Errorf("error while inserting beer photo to table beer_photo: %v", err)
+	}
+	for _, photo := range beer.Photos {
+		_, err = s.db.Exec(queryAddBeerPhoto, beer.ID, photo)
+		if err != nil {
+			return fmt.Errorf("error while inserting beer photo to table beer_photo: %v", err)
+		}
+	}
+
 	return nil
 }
 
@@ -108,5 +168,10 @@ func (s *store) DeleteBeer(ctx context.Context, id int) error {
 		return fmt.Errorf("error while getting number of affected rows: %v", err)
 	}
 	session.Logger(ctx).WithField("rowsAffected", rowsAffected).Debug("Succesfully deleted beer in database")
+
+	_, err = s.db.Exec(queryDeleteBeerPhotos, id)
+	if err != nil {
+		return fmt.Errorf("error while inserting beer photo to table beer_photo: %v", err)
+	}
 	return nil
 }

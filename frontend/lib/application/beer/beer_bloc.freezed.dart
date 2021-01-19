@@ -29,11 +29,13 @@ class _$BeerEventTearOff {
   }
 
 // ignore: unused_element
-  _UpdateBeer updateBeer(String name, String code, double price) {
+  _UpdateBeer updateBeer(
+      String name, String code, double price, List<String> photos) {
     return _UpdateBeer(
       name,
       code,
       price,
+      photos,
     );
   }
 }
@@ -49,14 +51,17 @@ mixin _$BeerEvent {
     @required Result incrementQuantity(),
     @required Result decrementQuantity(),
     @required Result updateQuantity(),
-    @required Result updateBeer(String name, String code, double price),
+    @required
+        Result updateBeer(
+            String name, String code, double price, List<String> photos),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result incrementQuantity(),
     Result decrementQuantity(),
     Result updateQuantity(),
-    Result updateBeer(String name, String code, double price),
+    Result updateBeer(
+        String name, String code, double price, List<String> photos),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -133,7 +138,9 @@ class _$_IncrementQuantity implements _IncrementQuantity {
     @required Result incrementQuantity(),
     @required Result decrementQuantity(),
     @required Result updateQuantity(),
-    @required Result updateBeer(String name, String code, double price),
+    @required
+        Result updateBeer(
+            String name, String code, double price, List<String> photos),
   }) {
     assert(incrementQuantity != null);
     assert(decrementQuantity != null);
@@ -148,7 +155,8 @@ class _$_IncrementQuantity implements _IncrementQuantity {
     Result incrementQuantity(),
     Result decrementQuantity(),
     Result updateQuantity(),
-    Result updateBeer(String name, String code, double price),
+    Result updateBeer(
+        String name, String code, double price, List<String> photos),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -236,7 +244,9 @@ class _$_DecrementQuantity implements _DecrementQuantity {
     @required Result incrementQuantity(),
     @required Result decrementQuantity(),
     @required Result updateQuantity(),
-    @required Result updateBeer(String name, String code, double price),
+    @required
+        Result updateBeer(
+            String name, String code, double price, List<String> photos),
   }) {
     assert(incrementQuantity != null);
     assert(decrementQuantity != null);
@@ -251,7 +261,8 @@ class _$_DecrementQuantity implements _DecrementQuantity {
     Result incrementQuantity(),
     Result decrementQuantity(),
     Result updateQuantity(),
-    Result updateBeer(String name, String code, double price),
+    Result updateBeer(
+        String name, String code, double price, List<String> photos),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -338,7 +349,9 @@ class _$_WaitForUpdate implements _WaitForUpdate {
     @required Result incrementQuantity(),
     @required Result decrementQuantity(),
     @required Result updateQuantity(),
-    @required Result updateBeer(String name, String code, double price),
+    @required
+        Result updateBeer(
+            String name, String code, double price, List<String> photos),
   }) {
     assert(incrementQuantity != null);
     assert(decrementQuantity != null);
@@ -353,7 +366,8 @@ class _$_WaitForUpdate implements _WaitForUpdate {
     Result incrementQuantity(),
     Result decrementQuantity(),
     Result updateQuantity(),
-    Result updateBeer(String name, String code, double price),
+    Result updateBeer(
+        String name, String code, double price, List<String> photos),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -404,7 +418,7 @@ abstract class _$UpdateBeerCopyWith<$Res> {
   factory _$UpdateBeerCopyWith(
           _UpdateBeer value, $Res Function(_UpdateBeer) then) =
       __$UpdateBeerCopyWithImpl<$Res>;
-  $Res call({String name, String code, double price});
+  $Res call({String name, String code, double price, List<String> photos});
 }
 
 /// @nodoc
@@ -422,21 +436,24 @@ class __$UpdateBeerCopyWithImpl<$Res> extends _$BeerEventCopyWithImpl<$Res>
     Object name = freezed,
     Object code = freezed,
     Object price = freezed,
+    Object photos = freezed,
   }) {
     return _then(_UpdateBeer(
       name == freezed ? _value.name : name as String,
       code == freezed ? _value.code : code as String,
       price == freezed ? _value.price : price as double,
+      photos == freezed ? _value.photos : photos as List<String>,
     ));
   }
 }
 
 /// @nodoc
 class _$_UpdateBeer implements _UpdateBeer {
-  const _$_UpdateBeer(this.name, this.code, this.price)
+  const _$_UpdateBeer(this.name, this.code, this.price, this.photos)
       : assert(name != null),
         assert(code != null),
-        assert(price != null);
+        assert(price != null),
+        assert(photos != null);
 
   @override
   final String name;
@@ -444,10 +461,12 @@ class _$_UpdateBeer implements _UpdateBeer {
   final String code;
   @override
   final double price;
+  @override
+  final List<String> photos;
 
   @override
   String toString() {
-    return 'BeerEvent.updateBeer(name: $name, code: $code, price: $price)';
+    return 'BeerEvent.updateBeer(name: $name, code: $code, price: $price, photos: $photos)';
   }
 
   @override
@@ -459,7 +478,9 @@ class _$_UpdateBeer implements _UpdateBeer {
             (identical(other.code, code) ||
                 const DeepCollectionEquality().equals(other.code, code)) &&
             (identical(other.price, price) ||
-                const DeepCollectionEquality().equals(other.price, price)));
+                const DeepCollectionEquality().equals(other.price, price)) &&
+            (identical(other.photos, photos) ||
+                const DeepCollectionEquality().equals(other.photos, photos)));
   }
 
   @override
@@ -467,7 +488,8 @@ class _$_UpdateBeer implements _UpdateBeer {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(code) ^
-      const DeepCollectionEquality().hash(price);
+      const DeepCollectionEquality().hash(price) ^
+      const DeepCollectionEquality().hash(photos);
 
   @override
   _$UpdateBeerCopyWith<_UpdateBeer> get copyWith =>
@@ -479,13 +501,15 @@ class _$_UpdateBeer implements _UpdateBeer {
     @required Result incrementQuantity(),
     @required Result decrementQuantity(),
     @required Result updateQuantity(),
-    @required Result updateBeer(String name, String code, double price),
+    @required
+        Result updateBeer(
+            String name, String code, double price, List<String> photos),
   }) {
     assert(incrementQuantity != null);
     assert(decrementQuantity != null);
     assert(updateQuantity != null);
     assert(updateBeer != null);
-    return updateBeer(name, code, price);
+    return updateBeer(name, code, price, photos);
   }
 
   @override
@@ -494,12 +518,13 @@ class _$_UpdateBeer implements _UpdateBeer {
     Result incrementQuantity(),
     Result decrementQuantity(),
     Result updateQuantity(),
-    Result updateBeer(String name, String code, double price),
+    Result updateBeer(
+        String name, String code, double price, List<String> photos),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (updateBeer != null) {
-      return updateBeer(name, code, price);
+      return updateBeer(name, code, price, photos);
     }
     return orElse();
   }
@@ -537,12 +562,14 @@ class _$_UpdateBeer implements _UpdateBeer {
 }
 
 abstract class _UpdateBeer implements BeerEvent {
-  const factory _UpdateBeer(String name, String code, double price) =
+  const factory _UpdateBeer(
+          String name, String code, double price, List<String> photos) =
       _$_UpdateBeer;
 
   String get name;
   String get code;
   double get price;
+  List<String> get photos;
   _$UpdateBeerCopyWith<_UpdateBeer> get copyWith;
 }
 

@@ -33,11 +33,13 @@ class _$BeersEventTearOff {
   }
 
 // ignore: unused_element
-  _RegisterBeer registerBeer(BeerName name, ProductCode code, Price price) {
+  _RegisterBeer registerBeer(
+      BeerName name, ProductCode code, Price price, List<String> photos) {
     return _RegisterBeer(
       name,
       code,
       price,
+      photos,
     );
   }
 }
@@ -53,14 +55,17 @@ mixin _$BeersEvent {
     @required Result fetch(),
     @required Result synchronize(Completer<void> completer),
     @required Result deleteBeer(ID beerId),
-    @required Result registerBeer(BeerName name, ProductCode code, Price price),
+    @required
+        Result registerBeer(
+            BeerName name, ProductCode code, Price price, List<String> photos),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result fetch(),
     Result synchronize(Completer<void> completer),
     Result deleteBeer(ID beerId),
-    Result registerBeer(BeerName name, ProductCode code, Price price),
+    Result registerBeer(
+        BeerName name, ProductCode code, Price price, List<String> photos),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -146,7 +151,9 @@ class _$_FetchFromServer
     @required Result fetch(),
     @required Result synchronize(Completer<void> completer),
     @required Result deleteBeer(ID beerId),
-    @required Result registerBeer(BeerName name, ProductCode code, Price price),
+    @required
+        Result registerBeer(
+            BeerName name, ProductCode code, Price price, List<String> photos),
   }) {
     assert(fetch != null);
     assert(synchronize != null);
@@ -161,7 +168,8 @@ class _$_FetchFromServer
     Result fetch(),
     Result synchronize(Completer<void> completer),
     Result deleteBeer(ID beerId),
-    Result registerBeer(BeerName name, ProductCode code, Price price),
+    Result registerBeer(
+        BeerName name, ProductCode code, Price price, List<String> photos),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -276,7 +284,9 @@ class _$_Refresh with DiagnosticableTreeMixin implements _Refresh {
     @required Result fetch(),
     @required Result synchronize(Completer<void> completer),
     @required Result deleteBeer(ID beerId),
-    @required Result registerBeer(BeerName name, ProductCode code, Price price),
+    @required
+        Result registerBeer(
+            BeerName name, ProductCode code, Price price, List<String> photos),
   }) {
     assert(fetch != null);
     assert(synchronize != null);
@@ -291,7 +301,8 @@ class _$_Refresh with DiagnosticableTreeMixin implements _Refresh {
     Result fetch(),
     Result synchronize(Completer<void> completer),
     Result deleteBeer(ID beerId),
-    Result registerBeer(BeerName name, ProductCode code, Price price),
+    Result registerBeer(
+        BeerName name, ProductCode code, Price price, List<String> photos),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -410,7 +421,9 @@ class _$_DeleteBeer with DiagnosticableTreeMixin implements _DeleteBeer {
     @required Result fetch(),
     @required Result synchronize(Completer<void> completer),
     @required Result deleteBeer(ID beerId),
-    @required Result registerBeer(BeerName name, ProductCode code, Price price),
+    @required
+        Result registerBeer(
+            BeerName name, ProductCode code, Price price, List<String> photos),
   }) {
     assert(fetch != null);
     assert(synchronize != null);
@@ -425,7 +438,8 @@ class _$_DeleteBeer with DiagnosticableTreeMixin implements _DeleteBeer {
     Result fetch(),
     Result synchronize(Completer<void> completer),
     Result deleteBeer(ID beerId),
-    Result registerBeer(BeerName name, ProductCode code, Price price),
+    Result registerBeer(
+        BeerName name, ProductCode code, Price price, List<String> photos),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -479,7 +493,8 @@ abstract class _$RegisterBeerCopyWith<$Res> {
   factory _$RegisterBeerCopyWith(
           _RegisterBeer value, $Res Function(_RegisterBeer) then) =
       __$RegisterBeerCopyWithImpl<$Res>;
-  $Res call({BeerName name, ProductCode code, Price price});
+  $Res call(
+      {BeerName name, ProductCode code, Price price, List<String> photos});
 }
 
 /// @nodoc
@@ -497,21 +512,24 @@ class __$RegisterBeerCopyWithImpl<$Res> extends _$BeersEventCopyWithImpl<$Res>
     Object name = freezed,
     Object code = freezed,
     Object price = freezed,
+    Object photos = freezed,
   }) {
     return _then(_RegisterBeer(
       name == freezed ? _value.name : name as BeerName,
       code == freezed ? _value.code : code as ProductCode,
       price == freezed ? _value.price : price as Price,
+      photos == freezed ? _value.photos : photos as List<String>,
     ));
   }
 }
 
 /// @nodoc
 class _$_RegisterBeer with DiagnosticableTreeMixin implements _RegisterBeer {
-  const _$_RegisterBeer(this.name, this.code, this.price)
+  const _$_RegisterBeer(this.name, this.code, this.price, this.photos)
       : assert(name != null),
         assert(code != null),
-        assert(price != null);
+        assert(price != null),
+        assert(photos != null);
 
   @override
   final BeerName name;
@@ -519,10 +537,12 @@ class _$_RegisterBeer with DiagnosticableTreeMixin implements _RegisterBeer {
   final ProductCode code;
   @override
   final Price price;
+  @override
+  final List<String> photos;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BeersEvent.registerBeer(name: $name, code: $code, price: $price)';
+    return 'BeersEvent.registerBeer(name: $name, code: $code, price: $price, photos: $photos)';
   }
 
   @override
@@ -532,7 +552,8 @@ class _$_RegisterBeer with DiagnosticableTreeMixin implements _RegisterBeer {
       ..add(DiagnosticsProperty('type', 'BeersEvent.registerBeer'))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('code', code))
-      ..add(DiagnosticsProperty('price', price));
+      ..add(DiagnosticsProperty('price', price))
+      ..add(DiagnosticsProperty('photos', photos));
   }
 
   @override
@@ -544,7 +565,9 @@ class _$_RegisterBeer with DiagnosticableTreeMixin implements _RegisterBeer {
             (identical(other.code, code) ||
                 const DeepCollectionEquality().equals(other.code, code)) &&
             (identical(other.price, price) ||
-                const DeepCollectionEquality().equals(other.price, price)));
+                const DeepCollectionEquality().equals(other.price, price)) &&
+            (identical(other.photos, photos) ||
+                const DeepCollectionEquality().equals(other.photos, photos)));
   }
 
   @override
@@ -552,7 +575,8 @@ class _$_RegisterBeer with DiagnosticableTreeMixin implements _RegisterBeer {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(code) ^
-      const DeepCollectionEquality().hash(price);
+      const DeepCollectionEquality().hash(price) ^
+      const DeepCollectionEquality().hash(photos);
 
   @override
   _$RegisterBeerCopyWith<_RegisterBeer> get copyWith =>
@@ -564,13 +588,15 @@ class _$_RegisterBeer with DiagnosticableTreeMixin implements _RegisterBeer {
     @required Result fetch(),
     @required Result synchronize(Completer<void> completer),
     @required Result deleteBeer(ID beerId),
-    @required Result registerBeer(BeerName name, ProductCode code, Price price),
+    @required
+        Result registerBeer(
+            BeerName name, ProductCode code, Price price, List<String> photos),
   }) {
     assert(fetch != null);
     assert(synchronize != null);
     assert(deleteBeer != null);
     assert(registerBeer != null);
-    return registerBeer(name, code, price);
+    return registerBeer(name, code, price, photos);
   }
 
   @override
@@ -579,12 +605,13 @@ class _$_RegisterBeer with DiagnosticableTreeMixin implements _RegisterBeer {
     Result fetch(),
     Result synchronize(Completer<void> completer),
     Result deleteBeer(ID beerId),
-    Result registerBeer(BeerName name, ProductCode code, Price price),
+    Result registerBeer(
+        BeerName name, ProductCode code, Price price, List<String> photos),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (registerBeer != null) {
-      return registerBeer(name, code, price);
+      return registerBeer(name, code, price, photos);
     }
     return orElse();
   }
@@ -622,12 +649,14 @@ class _$_RegisterBeer with DiagnosticableTreeMixin implements _RegisterBeer {
 }
 
 abstract class _RegisterBeer implements BeersEvent {
-  const factory _RegisterBeer(BeerName name, ProductCode code, Price price) =
+  const factory _RegisterBeer(
+          BeerName name, ProductCode code, Price price, List<String> photos) =
       _$_RegisterBeer;
 
   BeerName get name;
   ProductCode get code;
   Price get price;
+  List<String> get photos;
   _$RegisterBeerCopyWith<_RegisterBeer> get copyWith;
 }
 

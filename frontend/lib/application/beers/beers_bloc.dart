@@ -71,6 +71,7 @@ class BeersBloc extends Bloc<BeersEvent, BeersState> {
           e.name.getOrCrash(),
           e.code.getOrCrash(),
           e.price.getOrCrash(),
+          e.photos,
         );
         var result = await repository.getAll();
         yield result.value.fold(

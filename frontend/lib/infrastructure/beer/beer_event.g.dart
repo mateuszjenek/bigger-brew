@@ -26,6 +26,7 @@ _$RegisterBeer _$_$RegisterBeerFromJson(Map<String, dynamic> json) {
     json['name'] as String,
     json['productCode'] as String,
     (json['price'] as num)?.toDouble(),
+    (json['photos'] as List)?.map((e) => e as String)?.toList(),
   );
 }
 
@@ -36,6 +37,7 @@ Map<String, dynamic> _$_$RegisterBeerToJson(_$RegisterBeer instance) =>
       'name': instance.name,
       'productCode': instance.productCode,
       'price': instance.price,
+      'photos': instance.photos,
     };
 
 _$UpdateBeer _$_$UpdateBeerFromJson(Map<String, dynamic> json) {
@@ -45,6 +47,7 @@ _$UpdateBeer _$_$UpdateBeerFromJson(Map<String, dynamic> json) {
     json['name'] as String,
     json['productCode'] as String,
     (json['price'] as num)?.toDouble(),
+    (json['photos'] as List)?.map((e) => e as String)?.toList(),
   );
 }
 
@@ -55,6 +58,7 @@ Map<String, dynamic> _$_$UpdateBeerToJson(_$UpdateBeer instance) =>
       'name': instance.name,
       'productCode': instance.productCode,
       'price': instance.price,
+      'photos': instance.photos,
     };
 
 _$UpdateQunatity _$_$UpdateQunatityFromJson(Map<String, dynamic> json) {

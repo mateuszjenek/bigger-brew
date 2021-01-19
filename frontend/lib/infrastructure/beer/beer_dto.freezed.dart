@@ -22,13 +22,15 @@ class _$BeerDtoTearOff {
       @required String name,
       @required String productCode,
       @required double price,
-      @required int quantity}) {
+      @required int quantity,
+      @required List<String> photos}) {
     return _BeerDto(
       id: id,
       name: name,
       productCode: productCode,
       price: price,
       quantity: quantity,
+      photos: photos,
     );
   }
 
@@ -49,6 +51,7 @@ mixin _$BeerDto {
   String get productCode;
   double get price;
   int get quantity;
+  List<String> get photos;
 
   Map<String, dynamic> toJson();
   $BeerDtoCopyWith<BeerDto> get copyWith;
@@ -59,7 +62,12 @@ abstract class $BeerDtoCopyWith<$Res> {
   factory $BeerDtoCopyWith(BeerDto value, $Res Function(BeerDto) then) =
       _$BeerDtoCopyWithImpl<$Res>;
   $Res call(
-      {int id, String name, String productCode, double price, int quantity});
+      {int id,
+      String name,
+      String productCode,
+      double price,
+      int quantity,
+      List<String> photos});
 }
 
 /// @nodoc
@@ -77,6 +85,7 @@ class _$BeerDtoCopyWithImpl<$Res> implements $BeerDtoCopyWith<$Res> {
     Object productCode = freezed,
     Object price = freezed,
     Object quantity = freezed,
+    Object photos = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as int,
@@ -85,6 +94,7 @@ class _$BeerDtoCopyWithImpl<$Res> implements $BeerDtoCopyWith<$Res> {
           productCode == freezed ? _value.productCode : productCode as String,
       price: price == freezed ? _value.price : price as double,
       quantity: quantity == freezed ? _value.quantity : quantity as int,
+      photos: photos == freezed ? _value.photos : photos as List<String>,
     ));
   }
 }
@@ -95,7 +105,12 @@ abstract class _$BeerDtoCopyWith<$Res> implements $BeerDtoCopyWith<$Res> {
       __$BeerDtoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int id, String name, String productCode, double price, int quantity});
+      {int id,
+      String name,
+      String productCode,
+      double price,
+      int quantity,
+      List<String> photos});
 }
 
 /// @nodoc
@@ -114,6 +129,7 @@ class __$BeerDtoCopyWithImpl<$Res> extends _$BeerDtoCopyWithImpl<$Res>
     Object productCode = freezed,
     Object price = freezed,
     Object quantity = freezed,
+    Object photos = freezed,
   }) {
     return _then(_BeerDto(
       id: id == freezed ? _value.id : id as int,
@@ -122,6 +138,7 @@ class __$BeerDtoCopyWithImpl<$Res> extends _$BeerDtoCopyWithImpl<$Res>
           productCode == freezed ? _value.productCode : productCode as String,
       price: price == freezed ? _value.price : price as double,
       quantity: quantity == freezed ? _value.quantity : quantity as int,
+      photos: photos == freezed ? _value.photos : photos as List<String>,
     ));
   }
 }
@@ -135,12 +152,14 @@ class _$_BeerDto implements _BeerDto {
       @required this.name,
       @required this.productCode,
       @required this.price,
-      @required this.quantity})
+      @required this.quantity,
+      @required this.photos})
       : assert(id != null),
         assert(name != null),
         assert(productCode != null),
         assert(price != null),
-        assert(quantity != null);
+        assert(quantity != null),
+        assert(photos != null);
 
   factory _$_BeerDto.fromJson(Map<String, dynamic> json) =>
       _$_$_BeerDtoFromJson(json);
@@ -155,10 +174,12 @@ class _$_BeerDto implements _BeerDto {
   final double price;
   @override
   final int quantity;
+  @override
+  final List<String> photos;
 
   @override
   String toString() {
-    return 'BeerDto(id: $id, name: $name, productCode: $productCode, price: $price, quantity: $quantity)';
+    return 'BeerDto(id: $id, name: $name, productCode: $productCode, price: $price, quantity: $quantity, photos: $photos)';
   }
 
   @override
@@ -176,7 +197,9 @@ class _$_BeerDto implements _BeerDto {
                 const DeepCollectionEquality().equals(other.price, price)) &&
             (identical(other.quantity, quantity) ||
                 const DeepCollectionEquality()
-                    .equals(other.quantity, quantity)));
+                    .equals(other.quantity, quantity)) &&
+            (identical(other.photos, photos) ||
+                const DeepCollectionEquality().equals(other.photos, photos)));
   }
 
   @override
@@ -186,7 +209,8 @@ class _$_BeerDto implements _BeerDto {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(productCode) ^
       const DeepCollectionEquality().hash(price) ^
-      const DeepCollectionEquality().hash(quantity);
+      const DeepCollectionEquality().hash(quantity) ^
+      const DeepCollectionEquality().hash(photos);
 
   @override
   _$BeerDtoCopyWith<_BeerDto> get copyWith =>
@@ -204,7 +228,8 @@ abstract class _BeerDto implements BeerDto {
       @required String name,
       @required String productCode,
       @required double price,
-      @required int quantity}) = _$_BeerDto;
+      @required int quantity,
+      @required List<String> photos}) = _$_BeerDto;
 
   factory _BeerDto.fromJson(Map<String, dynamic> json) = _$_BeerDto.fromJson;
 
@@ -218,6 +243,8 @@ abstract class _BeerDto implements BeerDto {
   double get price;
   @override
   int get quantity;
+  @override
+  List<String> get photos;
   @override
   _$BeerDtoCopyWith<_BeerDto> get copyWith;
 }

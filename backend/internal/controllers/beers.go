@@ -38,9 +38,10 @@ func (endpoint *beersEndpoints) get(w http.ResponseWriter, r *http.Request) {
 
 func (endpoint *beersEndpoints) post(w http.ResponseWriter, r *http.Request) {
 	var body struct {
-		Name        string  `json:"name"`
-		ProductCode string  `json:"productCode"`
-		Price       float64 `json:"price"`
+		Name        string   `json:"name"`
+		ProductCode string   `json:"productCode"`
+		Price       float64  `json:"price"`
+		Photos      []string `json:"photos"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
@@ -48,7 +49,7 @@ func (endpoint *beersEndpoints) post(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	beer := &models.Beer{Name: body.Name, ProductCode: body.ProductCode, Price: body.Price, Quantity: 0}
+	beer := &models.Beer{Name: body.Name, ProductCode: body.ProductCode, Price: body.Price, Quantity: 0, Photos: body.Photos}
 	beer, err := endpoint.store.RegisterBeer(r.Context(), beer)
 	if err != nil {
 		views.RenderError(w, err)
@@ -66,9 +67,10 @@ func (endpoint *beersEndpoints) postWithID(w http.ResponseWriter, r *http.Reques
 	}
 
 	var body struct {
-		Name        string  `json:"name"`
-		ProductCode string  `json:"productCode"`
-		Price       float64 `json:"price"`
+		Name        string   `json:"name"`
+		ProductCode string   `json:"productCode"`
+		Price       float64  `json:"price"`
+		Photos      []string `json:"photos"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
@@ -83,8 +85,11 @@ func (endpoint *beersEndpoints) postWithID(w http.ResponseWriter, r *http.Reques
 	}
 
 	beer.Name = body.Name
-	beer.Price = body.Price
 	beer.ProductCode = body.ProductCode
+	beer.Price = body.Price
+	if body.Photos != nil {
+		beer.Photos = body.Photos
+	}
 
 	err = endpoint.store.UpdateBeer(r.Context(), beer)
 	if err != nil {

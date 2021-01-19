@@ -13,12 +13,14 @@ abstract class IBeerSource {
     String name,
     String productCode,
     double price,
+    List<String> photos,
   );
   Future<Either<BeerFailure, Beer>> updateBeer(
     int beerId,
     String name,
     String productCode,
     double price,
+    List<String> photos,
   );
   Future<Either<BeerFailure, Beer>> updateQuantity(
     int beerId,

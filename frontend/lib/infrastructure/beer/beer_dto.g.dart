@@ -13,6 +13,7 @@ _$_BeerDto _$_$_BeerDtoFromJson(Map<String, dynamic> json) {
     productCode: json['productCode'] as String,
     price: (json['price'] as num)?.toDouble(),
     quantity: json['quantity'] as int,
+    photos: (json['photos'] as List)?.map((e) => e as String)?.toList(),
   );
 }
 
@@ -23,4 +24,5 @@ Map<String, dynamic> _$_$_BeerDtoToJson(_$_BeerDto instance) =>
       'productCode': instance.productCode,
       'price': instance.price,
       'quantity': instance.quantity,
+      'photos': instance.photos,
     };

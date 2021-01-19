@@ -6,12 +6,16 @@ import 'package:bigger_brew/application/beers/beers_bloc.dart';
 import 'package:bigger_brew/domain/auth/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'item_form_page_argument.dart';
 
 class ItemFormPage extends StatelessWidget implements AutoRouteWrapper {
   final ItemFormPageArgument arguments;
-  const ItemFormPage(this.arguments);
+
+  final picker = ImagePicker();
+
+  ItemFormPage(this.arguments);
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +37,7 @@ class ItemFormPage extends StatelessWidget implements AutoRouteWrapper {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           TextFormField(
                             initialValue: state.name.getOrCrash(),
@@ -85,6 +90,48 @@ class ItemFormPage extends StatelessWidget implements AutoRouteWrapper {
                             },
                           ),
                           Padding(
+                            padding:
+                                const EdgeInsets.only(top: 32.0, bottom: 16.0),
+                            child: Text(
+                              "Photos urls:",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                          ...state.photos
+                              .map((url) => Dismissible(
+                                    onDismissed: (_) => context
+                                        .bloc<BeerFormBloc>()
+                                        .add(BeerFormEvent.removePhoto(url)),
+                                    key: Key(url),
+                                    child: Card(
+                                      child: ListTile(
+                                        title: Text(url),
+                                      ),
+                                    ),
+                                  ))
+                              .toList(),
+                          TextField(
+                            onChanged: (value) => context
+                                .bloc<BeerFormBloc>()
+                                .add(BeerFormEvent.newUrlChanged(value)),
+                            decoration: InputDecoration(
+                              labelText: "Enter new photo url",
+                              suffixIcon: IconButton(
+                                icon: Icon(Icons.add),
+                                onPressed: () {
+                                  context.bloc<BeerFormBloc>().add(
+                                      BeerFormEvent.addPhoto(state.newURL));
+                                },
+                              ),
+                            ),
+                            textInputAction: TextInputAction.done,
+                            onEditingComplete: () {
+                              context
+                                  .bloc<BeerFormBloc>()
+                                  .add(BeerFormEvent.addPhoto(state.newURL));
+                            },
+                          ),
+                          Padding(
                             padding: const EdgeInsets.only(top: 16.0),
                             child: Row(
                               children: arguments.map(
@@ -118,7 +165,8 @@ class ItemFormPage extends StatelessWidget implements AutoRouteWrapper {
                                         arg.beerBloc.add(BeerEvent.updateBeer(
                                             state.name.getOrCrash(),
                                             state.code.getOrCrash(),
-                                            state.price.getOrCrash()));
+                                            state.price.getOrCrash(),
+                                            state.photos));
                                         ExtendedNavigator.of(context).pop();
                                       },
                                     ),
@@ -134,6 +182,7 @@ class ItemFormPage extends StatelessWidget implements AutoRouteWrapper {
                                           state.name,
                                           state.code,
                                           state.price,
+                                          state.photos,
                                         ));
                                         ExtendedNavigator.of(context).pop();
                                       },
@@ -142,7 +191,7 @@ class ItemFormPage extends StatelessWidget implements AutoRouteWrapper {
                                 ],
                               ),
                             ),
-                          )
+                          ),
                         ],
                       ),
                     )

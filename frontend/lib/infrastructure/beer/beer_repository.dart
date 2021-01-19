@@ -39,13 +39,11 @@ class BeerRepository implements IBeerRepository {
   }
 
   @override
-  Future<BeerRepositoryResult<Beer>> registerBeer(
-    String name,
-    String productCode,
-    double price,
-  ) async {
+  Future<BeerRepositoryResult<Beer>> registerBeer(String name,
+      String productCode, double price, List<String> photos) async {
     var source = await _getSource();
-    var result = await source.value1.registerBeer(name, productCode, price);
+    var result =
+        await source.value1.registerBeer(name, productCode, price, photos);
     return BeerRepositoryResult(result, source.value2, source.value3);
   }
 
@@ -55,10 +53,11 @@ class BeerRepository implements IBeerRepository {
     String name,
     String productCode,
     double price,
+    List<String> photos,
   ) async {
     var source = await _getSource();
-    var result =
-        await source.value1.updateBeer(beerId, name, productCode, price);
+    var result = await source.value1
+        .updateBeer(beerId, name, productCode, price, photos);
     return BeerRepositoryResult(result, source.value2, source.value3);
   }
 
@@ -103,6 +102,7 @@ class BeerRepository implements IBeerRepository {
             event.name,
             event.productCode,
             event.price,
+            event.photos,
           );
           result.fold(
             (_) {
@@ -121,6 +121,7 @@ class BeerRepository implements IBeerRepository {
             event.name,
             event.productCode,
             event.price,
+            event.photos,
           );
           if (result.isLeft()) isAnyEventFailed = true;
         },

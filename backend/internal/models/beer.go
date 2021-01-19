@@ -7,4 +7,5 @@ type Beer struct {
 	ProductCode string
 	Price       float64
 	Quantity    int
+	Photos      []string
 }

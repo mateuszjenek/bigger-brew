@@ -15,6 +15,7 @@ abstract class BeerEvent with _$BeerEvent {
     String name,
     String productCode,
     double price,
+    List<String> photos,
   ) = RegisterBeer;
   const factory BeerEvent.updateBeer(
     int timestamp,
@@ -22,6 +23,7 @@ abstract class BeerEvent with _$BeerEvent {
     String name,
     String productCode,
     double price,
+    List<String> photos,
   ) = UpdateBeer;
   const factory BeerEvent.updateQuantity(
     int timestamp,

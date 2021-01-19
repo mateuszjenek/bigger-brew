@@ -6,6 +6,7 @@ import 'package:bigger_brew/domain/beer/beer_repository_result.dart';
 import 'package:bigger_brew/domain/beer/i_beer_repository.dart';
 import 'package:bigger_brew/presentation/pages/home/widgets/sync_failed_dialog.dart';
 import 'package:bigger_brew/presentation/pages/item_form/item_form_page_argument.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -85,6 +86,21 @@ class BeersListItem extends HookWidget {
                       style: TextStyle(fontSize: 16.0),
                     ),
                   ),
+                  state.beer.photos.length > 0
+                      ? Padding(
+                          padding: const EdgeInsets.only(top: 16.0),
+                          child: CarouselSlider(
+                              options: CarouselOptions(
+                                height: 200,
+                                autoPlay: true,
+                                aspectRatio: 2.0,
+                                enlargeCenterPage: true,
+                                enlargeStrategy:
+                                    CenterPageEnlargeStrategy.height,
+                              ),
+                              items: images(state.beer.photos)),
+                        )
+                      : Container(),
                   Padding(
                     padding: const EdgeInsets.only(top: 16.0),
                     child: Row(
@@ -132,5 +148,23 @@ class BeersListItem extends HookWidget {
         ),
       ),
     );
+  }
+
+  List<Widget> images(List<String> urls) {
+    return urls
+        .map((url) => Container(
+              child: Container(
+                margin: EdgeInsets.all(5.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  child: Image.network(
+                    url,
+                    fit: BoxFit.cover,
+                    width: 1000.0,
+                  ),
+                ),
+              ),
+            ))
+        .toList();
   }
 }

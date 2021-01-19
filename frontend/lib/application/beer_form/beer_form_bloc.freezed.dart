@@ -33,6 +33,27 @@ class _$BeerFormEventTearOff {
       price,
     );
   }
+
+// ignore: unused_element
+  NewUrlChanged newUrlChanged(String url) {
+    return NewUrlChanged(
+      url,
+    );
+  }
+
+// ignore: unused_element
+  AddPhoto addPhoto(String url) {
+    return AddPhoto(
+      url,
+    );
+  }
+
+// ignore: unused_element
+  RemovePhoto removePhoto(String url) {
+    return RemovePhoto(
+      url,
+    );
+  }
 }
 
 /// @nodoc
@@ -46,12 +67,18 @@ mixin _$BeerFormEvent {
     @required Result nameChanged(String name),
     @required Result codeChanged(String code),
     @required Result priceChanged(double price),
+    @required Result newUrlChanged(String url),
+    @required Result addPhoto(String url),
+    @required Result removePhoto(String url),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result nameChanged(String name),
     Result codeChanged(String code),
     Result priceChanged(double price),
+    Result newUrlChanged(String url),
+    Result addPhoto(String url),
+    Result removePhoto(String url),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -59,12 +86,18 @@ mixin _$BeerFormEvent {
     @required Result nameChanged(NameChanged value),
     @required Result codeChanged(CodeChanged value),
     @required Result priceChanged(PriceChanged value),
+    @required Result newUrlChanged(NewUrlChanged value),
+    @required Result addPhoto(AddPhoto value),
+    @required Result removePhoto(RemovePhoto value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result nameChanged(NameChanged value),
     Result codeChanged(CodeChanged value),
     Result priceChanged(PriceChanged value),
+    Result newUrlChanged(NewUrlChanged value),
+    Result addPhoto(AddPhoto value),
+    Result removePhoto(RemovePhoto value),
     @required Result orElse(),
   });
 }
@@ -148,10 +181,16 @@ class _$NameChanged implements NameChanged {
     @required Result nameChanged(String name),
     @required Result codeChanged(String code),
     @required Result priceChanged(double price),
+    @required Result newUrlChanged(String url),
+    @required Result addPhoto(String url),
+    @required Result removePhoto(String url),
   }) {
     assert(nameChanged != null);
     assert(codeChanged != null);
     assert(priceChanged != null);
+    assert(newUrlChanged != null);
+    assert(addPhoto != null);
+    assert(removePhoto != null);
     return nameChanged(name);
   }
 
@@ -161,6 +200,9 @@ class _$NameChanged implements NameChanged {
     Result nameChanged(String name),
     Result codeChanged(String code),
     Result priceChanged(double price),
+    Result newUrlChanged(String url),
+    Result addPhoto(String url),
+    Result removePhoto(String url),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -176,10 +218,16 @@ class _$NameChanged implements NameChanged {
     @required Result nameChanged(NameChanged value),
     @required Result codeChanged(CodeChanged value),
     @required Result priceChanged(PriceChanged value),
+    @required Result newUrlChanged(NewUrlChanged value),
+    @required Result addPhoto(AddPhoto value),
+    @required Result removePhoto(RemovePhoto value),
   }) {
     assert(nameChanged != null);
     assert(codeChanged != null);
     assert(priceChanged != null);
+    assert(newUrlChanged != null);
+    assert(addPhoto != null);
+    assert(removePhoto != null);
     return nameChanged(this);
   }
 
@@ -189,6 +237,9 @@ class _$NameChanged implements NameChanged {
     Result nameChanged(NameChanged value),
     Result codeChanged(CodeChanged value),
     Result priceChanged(PriceChanged value),
+    Result newUrlChanged(NewUrlChanged value),
+    Result addPhoto(AddPhoto value),
+    Result removePhoto(RemovePhoto value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -268,10 +319,16 @@ class _$CodeChanged implements CodeChanged {
     @required Result nameChanged(String name),
     @required Result codeChanged(String code),
     @required Result priceChanged(double price),
+    @required Result newUrlChanged(String url),
+    @required Result addPhoto(String url),
+    @required Result removePhoto(String url),
   }) {
     assert(nameChanged != null);
     assert(codeChanged != null);
     assert(priceChanged != null);
+    assert(newUrlChanged != null);
+    assert(addPhoto != null);
+    assert(removePhoto != null);
     return codeChanged(code);
   }
 
@@ -281,6 +338,9 @@ class _$CodeChanged implements CodeChanged {
     Result nameChanged(String name),
     Result codeChanged(String code),
     Result priceChanged(double price),
+    Result newUrlChanged(String url),
+    Result addPhoto(String url),
+    Result removePhoto(String url),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -296,10 +356,16 @@ class _$CodeChanged implements CodeChanged {
     @required Result nameChanged(NameChanged value),
     @required Result codeChanged(CodeChanged value),
     @required Result priceChanged(PriceChanged value),
+    @required Result newUrlChanged(NewUrlChanged value),
+    @required Result addPhoto(AddPhoto value),
+    @required Result removePhoto(RemovePhoto value),
   }) {
     assert(nameChanged != null);
     assert(codeChanged != null);
     assert(priceChanged != null);
+    assert(newUrlChanged != null);
+    assert(addPhoto != null);
+    assert(removePhoto != null);
     return codeChanged(this);
   }
 
@@ -309,6 +375,9 @@ class _$CodeChanged implements CodeChanged {
     Result nameChanged(NameChanged value),
     Result codeChanged(CodeChanged value),
     Result priceChanged(PriceChanged value),
+    Result newUrlChanged(NewUrlChanged value),
+    Result addPhoto(AddPhoto value),
+    Result removePhoto(RemovePhoto value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -388,10 +457,16 @@ class _$PriceChanged implements PriceChanged {
     @required Result nameChanged(String name),
     @required Result codeChanged(String code),
     @required Result priceChanged(double price),
+    @required Result newUrlChanged(String url),
+    @required Result addPhoto(String url),
+    @required Result removePhoto(String url),
   }) {
     assert(nameChanged != null);
     assert(codeChanged != null);
     assert(priceChanged != null);
+    assert(newUrlChanged != null);
+    assert(addPhoto != null);
+    assert(removePhoto != null);
     return priceChanged(price);
   }
 
@@ -401,6 +476,9 @@ class _$PriceChanged implements PriceChanged {
     Result nameChanged(String name),
     Result codeChanged(String code),
     Result priceChanged(double price),
+    Result newUrlChanged(String url),
+    Result addPhoto(String url),
+    Result removePhoto(String url),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -416,10 +494,16 @@ class _$PriceChanged implements PriceChanged {
     @required Result nameChanged(NameChanged value),
     @required Result codeChanged(CodeChanged value),
     @required Result priceChanged(PriceChanged value),
+    @required Result newUrlChanged(NewUrlChanged value),
+    @required Result addPhoto(AddPhoto value),
+    @required Result removePhoto(RemovePhoto value),
   }) {
     assert(nameChanged != null);
     assert(codeChanged != null);
     assert(priceChanged != null);
+    assert(newUrlChanged != null);
+    assert(addPhoto != null);
+    assert(removePhoto != null);
     return priceChanged(this);
   }
 
@@ -429,6 +513,9 @@ class _$PriceChanged implements PriceChanged {
     Result nameChanged(NameChanged value),
     Result codeChanged(CodeChanged value),
     Result priceChanged(PriceChanged value),
+    Result newUrlChanged(NewUrlChanged value),
+    Result addPhoto(AddPhoto value),
+    Result removePhoto(RemovePhoto value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -447,6 +534,419 @@ abstract class PriceChanged implements BeerFormEvent {
 }
 
 /// @nodoc
+abstract class $NewUrlChangedCopyWith<$Res> {
+  factory $NewUrlChangedCopyWith(
+          NewUrlChanged value, $Res Function(NewUrlChanged) then) =
+      _$NewUrlChangedCopyWithImpl<$Res>;
+  $Res call({String url});
+}
+
+/// @nodoc
+class _$NewUrlChangedCopyWithImpl<$Res>
+    extends _$BeerFormEventCopyWithImpl<$Res>
+    implements $NewUrlChangedCopyWith<$Res> {
+  _$NewUrlChangedCopyWithImpl(
+      NewUrlChanged _value, $Res Function(NewUrlChanged) _then)
+      : super(_value, (v) => _then(v as NewUrlChanged));
+
+  @override
+  NewUrlChanged get _value => super._value as NewUrlChanged;
+
+  @override
+  $Res call({
+    Object url = freezed,
+  }) {
+    return _then(NewUrlChanged(
+      url == freezed ? _value.url : url as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$NewUrlChanged implements NewUrlChanged {
+  const _$NewUrlChanged(this.url) : assert(url != null);
+
+  @override
+  final String url;
+
+  @override
+  String toString() {
+    return 'BeerFormEvent.newUrlChanged(url: $url)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is NewUrlChanged &&
+            (identical(other.url, url) ||
+                const DeepCollectionEquality().equals(other.url, url)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(url);
+
+  @override
+  $NewUrlChangedCopyWith<NewUrlChanged> get copyWith =>
+      _$NewUrlChangedCopyWithImpl<NewUrlChanged>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result nameChanged(String name),
+    @required Result codeChanged(String code),
+    @required Result priceChanged(double price),
+    @required Result newUrlChanged(String url),
+    @required Result addPhoto(String url),
+    @required Result removePhoto(String url),
+  }) {
+    assert(nameChanged != null);
+    assert(codeChanged != null);
+    assert(priceChanged != null);
+    assert(newUrlChanged != null);
+    assert(addPhoto != null);
+    assert(removePhoto != null);
+    return newUrlChanged(url);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result nameChanged(String name),
+    Result codeChanged(String code),
+    Result priceChanged(double price),
+    Result newUrlChanged(String url),
+    Result addPhoto(String url),
+    Result removePhoto(String url),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (newUrlChanged != null) {
+      return newUrlChanged(url);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result nameChanged(NameChanged value),
+    @required Result codeChanged(CodeChanged value),
+    @required Result priceChanged(PriceChanged value),
+    @required Result newUrlChanged(NewUrlChanged value),
+    @required Result addPhoto(AddPhoto value),
+    @required Result removePhoto(RemovePhoto value),
+  }) {
+    assert(nameChanged != null);
+    assert(codeChanged != null);
+    assert(priceChanged != null);
+    assert(newUrlChanged != null);
+    assert(addPhoto != null);
+    assert(removePhoto != null);
+    return newUrlChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result nameChanged(NameChanged value),
+    Result codeChanged(CodeChanged value),
+    Result priceChanged(PriceChanged value),
+    Result newUrlChanged(NewUrlChanged value),
+    Result addPhoto(AddPhoto value),
+    Result removePhoto(RemovePhoto value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (newUrlChanged != null) {
+      return newUrlChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NewUrlChanged implements BeerFormEvent {
+  const factory NewUrlChanged(String url) = _$NewUrlChanged;
+
+  String get url;
+  $NewUrlChangedCopyWith<NewUrlChanged> get copyWith;
+}
+
+/// @nodoc
+abstract class $AddPhotoCopyWith<$Res> {
+  factory $AddPhotoCopyWith(AddPhoto value, $Res Function(AddPhoto) then) =
+      _$AddPhotoCopyWithImpl<$Res>;
+  $Res call({String url});
+}
+
+/// @nodoc
+class _$AddPhotoCopyWithImpl<$Res> extends _$BeerFormEventCopyWithImpl<$Res>
+    implements $AddPhotoCopyWith<$Res> {
+  _$AddPhotoCopyWithImpl(AddPhoto _value, $Res Function(AddPhoto) _then)
+      : super(_value, (v) => _then(v as AddPhoto));
+
+  @override
+  AddPhoto get _value => super._value as AddPhoto;
+
+  @override
+  $Res call({
+    Object url = freezed,
+  }) {
+    return _then(AddPhoto(
+      url == freezed ? _value.url : url as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$AddPhoto implements AddPhoto {
+  const _$AddPhoto(this.url) : assert(url != null);
+
+  @override
+  final String url;
+
+  @override
+  String toString() {
+    return 'BeerFormEvent.addPhoto(url: $url)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is AddPhoto &&
+            (identical(other.url, url) ||
+                const DeepCollectionEquality().equals(other.url, url)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(url);
+
+  @override
+  $AddPhotoCopyWith<AddPhoto> get copyWith =>
+      _$AddPhotoCopyWithImpl<AddPhoto>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result nameChanged(String name),
+    @required Result codeChanged(String code),
+    @required Result priceChanged(double price),
+    @required Result newUrlChanged(String url),
+    @required Result addPhoto(String url),
+    @required Result removePhoto(String url),
+  }) {
+    assert(nameChanged != null);
+    assert(codeChanged != null);
+    assert(priceChanged != null);
+    assert(newUrlChanged != null);
+    assert(addPhoto != null);
+    assert(removePhoto != null);
+    return addPhoto(url);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result nameChanged(String name),
+    Result codeChanged(String code),
+    Result priceChanged(double price),
+    Result newUrlChanged(String url),
+    Result addPhoto(String url),
+    Result removePhoto(String url),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (addPhoto != null) {
+      return addPhoto(url);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result nameChanged(NameChanged value),
+    @required Result codeChanged(CodeChanged value),
+    @required Result priceChanged(PriceChanged value),
+    @required Result newUrlChanged(NewUrlChanged value),
+    @required Result addPhoto(AddPhoto value),
+    @required Result removePhoto(RemovePhoto value),
+  }) {
+    assert(nameChanged != null);
+    assert(codeChanged != null);
+    assert(priceChanged != null);
+    assert(newUrlChanged != null);
+    assert(addPhoto != null);
+    assert(removePhoto != null);
+    return addPhoto(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result nameChanged(NameChanged value),
+    Result codeChanged(CodeChanged value),
+    Result priceChanged(PriceChanged value),
+    Result newUrlChanged(NewUrlChanged value),
+    Result addPhoto(AddPhoto value),
+    Result removePhoto(RemovePhoto value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (addPhoto != null) {
+      return addPhoto(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AddPhoto implements BeerFormEvent {
+  const factory AddPhoto(String url) = _$AddPhoto;
+
+  String get url;
+  $AddPhotoCopyWith<AddPhoto> get copyWith;
+}
+
+/// @nodoc
+abstract class $RemovePhotoCopyWith<$Res> {
+  factory $RemovePhotoCopyWith(
+          RemovePhoto value, $Res Function(RemovePhoto) then) =
+      _$RemovePhotoCopyWithImpl<$Res>;
+  $Res call({String url});
+}
+
+/// @nodoc
+class _$RemovePhotoCopyWithImpl<$Res> extends _$BeerFormEventCopyWithImpl<$Res>
+    implements $RemovePhotoCopyWith<$Res> {
+  _$RemovePhotoCopyWithImpl(
+      RemovePhoto _value, $Res Function(RemovePhoto) _then)
+      : super(_value, (v) => _then(v as RemovePhoto));
+
+  @override
+  RemovePhoto get _value => super._value as RemovePhoto;
+
+  @override
+  $Res call({
+    Object url = freezed,
+  }) {
+    return _then(RemovePhoto(
+      url == freezed ? _value.url : url as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$RemovePhoto implements RemovePhoto {
+  const _$RemovePhoto(this.url) : assert(url != null);
+
+  @override
+  final String url;
+
+  @override
+  String toString() {
+    return 'BeerFormEvent.removePhoto(url: $url)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is RemovePhoto &&
+            (identical(other.url, url) ||
+                const DeepCollectionEquality().equals(other.url, url)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(url);
+
+  @override
+  $RemovePhotoCopyWith<RemovePhoto> get copyWith =>
+      _$RemovePhotoCopyWithImpl<RemovePhoto>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result nameChanged(String name),
+    @required Result codeChanged(String code),
+    @required Result priceChanged(double price),
+    @required Result newUrlChanged(String url),
+    @required Result addPhoto(String url),
+    @required Result removePhoto(String url),
+  }) {
+    assert(nameChanged != null);
+    assert(codeChanged != null);
+    assert(priceChanged != null);
+    assert(newUrlChanged != null);
+    assert(addPhoto != null);
+    assert(removePhoto != null);
+    return removePhoto(url);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result nameChanged(String name),
+    Result codeChanged(String code),
+    Result priceChanged(double price),
+    Result newUrlChanged(String url),
+    Result addPhoto(String url),
+    Result removePhoto(String url),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (removePhoto != null) {
+      return removePhoto(url);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result nameChanged(NameChanged value),
+    @required Result codeChanged(CodeChanged value),
+    @required Result priceChanged(PriceChanged value),
+    @required Result newUrlChanged(NewUrlChanged value),
+    @required Result addPhoto(AddPhoto value),
+    @required Result removePhoto(RemovePhoto value),
+  }) {
+    assert(nameChanged != null);
+    assert(codeChanged != null);
+    assert(priceChanged != null);
+    assert(newUrlChanged != null);
+    assert(addPhoto != null);
+    assert(removePhoto != null);
+    return removePhoto(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result nameChanged(NameChanged value),
+    Result codeChanged(CodeChanged value),
+    Result priceChanged(PriceChanged value),
+    Result newUrlChanged(NewUrlChanged value),
+    Result addPhoto(AddPhoto value),
+    Result removePhoto(RemovePhoto value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (removePhoto != null) {
+      return removePhoto(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class RemovePhoto implements BeerFormEvent {
+  const factory RemovePhoto(String url) = _$RemovePhoto;
+
+  String get url;
+  $RemovePhotoCopyWith<RemovePhoto> get copyWith;
+}
+
+/// @nodoc
 class _$BeerFormStateTearOff {
   const _$BeerFormStateTearOff();
 
@@ -454,11 +954,15 @@ class _$BeerFormStateTearOff {
   _BeerFormState call(
       {@required BeerName name,
       @required ProductCode code,
-      @required Price price}) {
+      @required Price price,
+      @required List<String> photos,
+      @required String newURL}) {
     return _BeerFormState(
       name: name,
       code: code,
       price: price,
+      photos: photos,
+      newURL: newURL,
     );
   }
 }
@@ -472,6 +976,8 @@ mixin _$BeerFormState {
   BeerName get name;
   ProductCode get code;
   Price get price;
+  List<String> get photos;
+  String get newURL;
 
   $BeerFormStateCopyWith<BeerFormState> get copyWith;
 }
@@ -481,7 +987,12 @@ abstract class $BeerFormStateCopyWith<$Res> {
   factory $BeerFormStateCopyWith(
           BeerFormState value, $Res Function(BeerFormState) then) =
       _$BeerFormStateCopyWithImpl<$Res>;
-  $Res call({BeerName name, ProductCode code, Price price});
+  $Res call(
+      {BeerName name,
+      ProductCode code,
+      Price price,
+      List<String> photos,
+      String newURL});
 }
 
 /// @nodoc
@@ -498,11 +1009,15 @@ class _$BeerFormStateCopyWithImpl<$Res>
     Object name = freezed,
     Object code = freezed,
     Object price = freezed,
+    Object photos = freezed,
+    Object newURL = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed ? _value.name : name as BeerName,
       code: code == freezed ? _value.code : code as ProductCode,
       price: price == freezed ? _value.price : price as Price,
+      photos: photos == freezed ? _value.photos : photos as List<String>,
+      newURL: newURL == freezed ? _value.newURL : newURL as String,
     ));
   }
 }
@@ -514,7 +1029,12 @@ abstract class _$BeerFormStateCopyWith<$Res>
           _BeerFormState value, $Res Function(_BeerFormState) then) =
       __$BeerFormStateCopyWithImpl<$Res>;
   @override
-  $Res call({BeerName name, ProductCode code, Price price});
+  $Res call(
+      {BeerName name,
+      ProductCode code,
+      Price price,
+      List<String> photos,
+      String newURL});
 }
 
 /// @nodoc
@@ -533,11 +1053,15 @@ class __$BeerFormStateCopyWithImpl<$Res>
     Object name = freezed,
     Object code = freezed,
     Object price = freezed,
+    Object photos = freezed,
+    Object newURL = freezed,
   }) {
     return _then(_BeerFormState(
       name: name == freezed ? _value.name : name as BeerName,
       code: code == freezed ? _value.code : code as ProductCode,
       price: price == freezed ? _value.price : price as Price,
+      photos: photos == freezed ? _value.photos : photos as List<String>,
+      newURL: newURL == freezed ? _value.newURL : newURL as String,
     ));
   }
 }
@@ -545,10 +1069,16 @@ class __$BeerFormStateCopyWithImpl<$Res>
 /// @nodoc
 class _$_BeerFormState implements _BeerFormState {
   const _$_BeerFormState(
-      {@required this.name, @required this.code, @required this.price})
+      {@required this.name,
+      @required this.code,
+      @required this.price,
+      @required this.photos,
+      @required this.newURL})
       : assert(name != null),
         assert(code != null),
-        assert(price != null);
+        assert(price != null),
+        assert(photos != null),
+        assert(newURL != null);
 
   @override
   final BeerName name;
@@ -556,10 +1086,14 @@ class _$_BeerFormState implements _BeerFormState {
   final ProductCode code;
   @override
   final Price price;
+  @override
+  final List<String> photos;
+  @override
+  final String newURL;
 
   @override
   String toString() {
-    return 'BeerFormState(name: $name, code: $code, price: $price)';
+    return 'BeerFormState(name: $name, code: $code, price: $price, photos: $photos, newURL: $newURL)';
   }
 
   @override
@@ -571,7 +1105,11 @@ class _$_BeerFormState implements _BeerFormState {
             (identical(other.code, code) ||
                 const DeepCollectionEquality().equals(other.code, code)) &&
             (identical(other.price, price) ||
-                const DeepCollectionEquality().equals(other.price, price)));
+                const DeepCollectionEquality().equals(other.price, price)) &&
+            (identical(other.photos, photos) ||
+                const DeepCollectionEquality().equals(other.photos, photos)) &&
+            (identical(other.newURL, newURL) ||
+                const DeepCollectionEquality().equals(other.newURL, newURL)));
   }
 
   @override
@@ -579,7 +1117,9 @@ class _$_BeerFormState implements _BeerFormState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(code) ^
-      const DeepCollectionEquality().hash(price);
+      const DeepCollectionEquality().hash(price) ^
+      const DeepCollectionEquality().hash(photos) ^
+      const DeepCollectionEquality().hash(newURL);
 
   @override
   _$BeerFormStateCopyWith<_BeerFormState> get copyWith =>
@@ -590,7 +1130,9 @@ abstract class _BeerFormState implements BeerFormState {
   const factory _BeerFormState(
       {@required BeerName name,
       @required ProductCode code,
-      @required Price price}) = _$_BeerFormState;
+      @required Price price,
+      @required List<String> photos,
+      @required String newURL}) = _$_BeerFormState;
 
   @override
   BeerName get name;
@@ -598,6 +1140,10 @@ abstract class _BeerFormState implements BeerFormState {
   ProductCode get code;
   @override
   Price get price;
+  @override
+  List<String> get photos;
+  @override
+  String get newURL;
   @override
   _$BeerFormStateCopyWith<_BeerFormState> get copyWith;
 }

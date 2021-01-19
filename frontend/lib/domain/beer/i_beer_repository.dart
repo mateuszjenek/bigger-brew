@@ -7,8 +7,8 @@ abstract class IBeerRepository {
   Future<BeerRepositoryResult<Beer>> updateQuantity(
       int beerId, int quantityChange);
   Future<BeerRepositoryResult<Unit>> deleteBeer(int beerId);
-  Future<BeerRepositoryResult<Beer>> updateBeer(
-      int beerId, String name, String productCode, double price);
+  Future<BeerRepositoryResult<Beer>> updateBeer(int beerId, String name,
+      String productCode, double price, List<String> photos);
   Future<BeerRepositoryResult<Beer>> registerBeer(
-      String name, String productCode, double price);
+      String name, String productCode, double price, List<String> photos);
 }

@@ -89,16 +89,26 @@ class RemoteBeerSource implements IBeerSource {
     String name,
     String productCode,
     double price,
+    List<String> photos,
   ) async {
     try {
       var token = await _getUserToken();
+      var photosJsonStr = "[";
+      for (var photo in photos) {
+        photosJsonStr += '"$photo",';
+      }
+      if (photos.length > 0) {
+        photosJsonStr = photosJsonStr.substring(0, photosJsonStr.length - 1);
+      }
+      photosJsonStr += "]";
+
       var response = await http.post(
         "$_repositoryAddress/beers/$beerId",
         headers: {
           'Authorization': 'Bearer $token',
         },
         body:
-            '{"name": "$name", "productCode": "$productCode", "price": $price}',
+            '{"name": "$name", "productCode": "$productCode", "price": $price, "photos": $photosJsonStr}',
       );
       if (response.statusCode == 200) {
         var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
@@ -107,6 +117,7 @@ class RemoteBeerSource implements IBeerSource {
           name,
           productCode,
           price,
+          photos,
           withoutQueue: true,
         );
         return right(BeerDto.fromJson(jsonResponse).toDomain());
@@ -149,16 +160,25 @@ class RemoteBeerSource implements IBeerSource {
     String name,
     String productCode,
     double price,
+    List<String> photos,
   ) async {
     try {
       var token = await _getUserToken();
+      var photosJsonStr = "[";
+      for (var photo in photos) {
+        photosJsonStr += '"$photo",';
+      }
+      if (photos.length > 0) {
+        photosJsonStr = photosJsonStr.substring(0, photosJsonStr.length - 1);
+      }
+      photosJsonStr += "]";
       var response = await http.post(
         "$_repositoryAddress/beers",
         headers: {
           'Authorization': 'Bearer $token',
         },
         body:
-            '{"name": "$name", "productCode": "$productCode", "price": $price}',
+            '{"name": "$name", "productCode": "$productCode", "price": $price, "photos": $photosJsonStr}',
       );
       if (response.statusCode == 200) {
         var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
@@ -166,6 +186,7 @@ class RemoteBeerSource implements IBeerSource {
           name,
           productCode,
           price,
+          photos,
           withoutQueue: true,
         );
         return right(BeerDto.fromJson(jsonResponse).toDomain());

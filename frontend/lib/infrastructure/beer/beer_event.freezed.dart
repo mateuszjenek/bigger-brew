@@ -37,26 +37,28 @@ class _$BeerEventTearOff {
   }
 
 // ignore: unused_element
-  RegisterBeer registerBeer(
-      int timestamp, int id, String name, String productCode, double price) {
+  RegisterBeer registerBeer(int timestamp, int id, String name,
+      String productCode, double price, List<String> photos) {
     return RegisterBeer(
       timestamp,
       id,
       name,
       productCode,
       price,
+      photos,
     );
   }
 
 // ignore: unused_element
   UpdateBeer updateBeer(int timestamp, int beerId, String name,
-      String productCode, double price) {
+      String productCode, double price, List<String> photos) {
     return UpdateBeer(
       timestamp,
       beerId,
       name,
       productCode,
       price,
+      photos,
     );
   }
 
@@ -88,20 +90,20 @@ mixin _$BeerEvent {
     @required Result deleteBeer(int timestamp, int beerId),
     @required
         Result registerBeer(int timestamp, int id, String name,
-            String productCode, double price),
+            String productCode, double price, List<String> photos),
     @required
         Result updateBeer(int timestamp, int beerId, String name,
-            String productCode, double price),
+            String productCode, double price, List<String> photos),
     @required
         Result updateQuantity(int timestamp, int beerId, int quantityChange),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result deleteBeer(int timestamp, int beerId),
-    Result registerBeer(
-        int timestamp, int id, String name, String productCode, double price),
+    Result registerBeer(int timestamp, int id, String name, String productCode,
+        double price, List<String> photos),
     Result updateBeer(int timestamp, int beerId, String name,
-        String productCode, double price),
+        String productCode, double price, List<String> photos),
     Result updateQuantity(int timestamp, int beerId, int quantityChange),
     @required Result orElse(),
   });
@@ -227,10 +229,10 @@ class _$DeleteBeer implements DeleteBeer {
     @required Result deleteBeer(int timestamp, int beerId),
     @required
         Result registerBeer(int timestamp, int id, String name,
-            String productCode, double price),
+            String productCode, double price, List<String> photos),
     @required
         Result updateBeer(int timestamp, int beerId, String name,
-            String productCode, double price),
+            String productCode, double price, List<String> photos),
     @required
         Result updateQuantity(int timestamp, int beerId, int quantityChange),
   }) {
@@ -245,10 +247,10 @@ class _$DeleteBeer implements DeleteBeer {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result deleteBeer(int timestamp, int beerId),
-    Result registerBeer(
-        int timestamp, int id, String name, String productCode, double price),
+    Result registerBeer(int timestamp, int id, String name, String productCode,
+        double price, List<String> photos),
     Result updateBeer(int timestamp, int beerId, String name,
-        String productCode, double price),
+        String productCode, double price, List<String> photos),
     Result updateQuantity(int timestamp, int beerId, int quantityChange),
     @required Result orElse(),
   }) {
@@ -316,7 +318,12 @@ abstract class $RegisterBeerCopyWith<$Res> implements $BeerEventCopyWith<$Res> {
       _$RegisterBeerCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int timestamp, int id, String name, String productCode, double price});
+      {int timestamp,
+      int id,
+      String name,
+      String productCode,
+      double price,
+      List<String> photos});
 }
 
 /// @nodoc
@@ -336,6 +343,7 @@ class _$RegisterBeerCopyWithImpl<$Res> extends _$BeerEventCopyWithImpl<$Res>
     Object name = freezed,
     Object productCode = freezed,
     Object price = freezed,
+    Object photos = freezed,
   }) {
     return _then(RegisterBeer(
       timestamp == freezed ? _value.timestamp : timestamp as int,
@@ -343,6 +351,7 @@ class _$RegisterBeerCopyWithImpl<$Res> extends _$BeerEventCopyWithImpl<$Res>
       name == freezed ? _value.name : name as String,
       productCode == freezed ? _value.productCode : productCode as String,
       price == freezed ? _value.price : price as double,
+      photos == freezed ? _value.photos : photos as List<String>,
     ));
   }
 }
@@ -351,13 +360,14 @@ class _$RegisterBeerCopyWithImpl<$Res> extends _$BeerEventCopyWithImpl<$Res>
 
 /// @nodoc
 class _$RegisterBeer implements RegisterBeer {
-  const _$RegisterBeer(
-      this.timestamp, this.id, this.name, this.productCode, this.price)
+  const _$RegisterBeer(this.timestamp, this.id, this.name, this.productCode,
+      this.price, this.photos)
       : assert(timestamp != null),
         assert(id != null),
         assert(name != null),
         assert(productCode != null),
-        assert(price != null);
+        assert(price != null),
+        assert(photos != null);
 
   factory _$RegisterBeer.fromJson(Map<String, dynamic> json) =>
       _$_$RegisterBeerFromJson(json);
@@ -372,10 +382,12 @@ class _$RegisterBeer implements RegisterBeer {
   final String productCode;
   @override
   final double price;
+  @override
+  final List<String> photos;
 
   @override
   String toString() {
-    return 'BeerEvent.registerBeer(timestamp: $timestamp, id: $id, name: $name, productCode: $productCode, price: $price)';
+    return 'BeerEvent.registerBeer(timestamp: $timestamp, id: $id, name: $name, productCode: $productCode, price: $price, photos: $photos)';
   }
 
   @override
@@ -393,7 +405,9 @@ class _$RegisterBeer implements RegisterBeer {
                 const DeepCollectionEquality()
                     .equals(other.productCode, productCode)) &&
             (identical(other.price, price) ||
-                const DeepCollectionEquality().equals(other.price, price)));
+                const DeepCollectionEquality().equals(other.price, price)) &&
+            (identical(other.photos, photos) ||
+                const DeepCollectionEquality().equals(other.photos, photos)));
   }
 
   @override
@@ -403,7 +417,8 @@ class _$RegisterBeer implements RegisterBeer {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(productCode) ^
-      const DeepCollectionEquality().hash(price);
+      const DeepCollectionEquality().hash(price) ^
+      const DeepCollectionEquality().hash(photos);
 
   @override
   $RegisterBeerCopyWith<RegisterBeer> get copyWith =>
@@ -415,10 +430,10 @@ class _$RegisterBeer implements RegisterBeer {
     @required Result deleteBeer(int timestamp, int beerId),
     @required
         Result registerBeer(int timestamp, int id, String name,
-            String productCode, double price),
+            String productCode, double price, List<String> photos),
     @required
         Result updateBeer(int timestamp, int beerId, String name,
-            String productCode, double price),
+            String productCode, double price, List<String> photos),
     @required
         Result updateQuantity(int timestamp, int beerId, int quantityChange),
   }) {
@@ -426,23 +441,23 @@ class _$RegisterBeer implements RegisterBeer {
     assert(registerBeer != null);
     assert(updateBeer != null);
     assert(updateQuantity != null);
-    return registerBeer(timestamp, id, name, productCode, price);
+    return registerBeer(timestamp, id, name, productCode, price, photos);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result deleteBeer(int timestamp, int beerId),
-    Result registerBeer(
-        int timestamp, int id, String name, String productCode, double price),
+    Result registerBeer(int timestamp, int id, String name, String productCode,
+        double price, List<String> photos),
     Result updateBeer(int timestamp, int beerId, String name,
-        String productCode, double price),
+        String productCode, double price, List<String> photos),
     Result updateQuantity(int timestamp, int beerId, int quantityChange),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (registerBeer != null) {
-      return registerBeer(timestamp, id, name, productCode, price);
+      return registerBeer(timestamp, id, name, productCode, price, photos);
     }
     return orElse();
   }
@@ -486,7 +501,7 @@ class _$RegisterBeer implements RegisterBeer {
 
 abstract class RegisterBeer implements BeerEvent {
   const factory RegisterBeer(int timestamp, int id, String name,
-      String productCode, double price) = _$RegisterBeer;
+      String productCode, double price, List<String> photos) = _$RegisterBeer;
 
   factory RegisterBeer.fromJson(Map<String, dynamic> json) =
       _$RegisterBeer.fromJson;
@@ -497,6 +512,7 @@ abstract class RegisterBeer implements BeerEvent {
   String get name;
   String get productCode;
   double get price;
+  List<String> get photos;
   @override
   $RegisterBeerCopyWith<RegisterBeer> get copyWith;
 }
@@ -512,7 +528,8 @@ abstract class $UpdateBeerCopyWith<$Res> implements $BeerEventCopyWith<$Res> {
       int beerId,
       String name,
       String productCode,
-      double price});
+      double price,
+      List<String> photos});
 }
 
 /// @nodoc
@@ -531,6 +548,7 @@ class _$UpdateBeerCopyWithImpl<$Res> extends _$BeerEventCopyWithImpl<$Res>
     Object name = freezed,
     Object productCode = freezed,
     Object price = freezed,
+    Object photos = freezed,
   }) {
     return _then(UpdateBeer(
       timestamp == freezed ? _value.timestamp : timestamp as int,
@@ -538,6 +556,7 @@ class _$UpdateBeerCopyWithImpl<$Res> extends _$BeerEventCopyWithImpl<$Res>
       name == freezed ? _value.name : name as String,
       productCode == freezed ? _value.productCode : productCode as String,
       price == freezed ? _value.price : price as double,
+      photos == freezed ? _value.photos : photos as List<String>,
     ));
   }
 }
@@ -546,13 +565,14 @@ class _$UpdateBeerCopyWithImpl<$Res> extends _$BeerEventCopyWithImpl<$Res>
 
 /// @nodoc
 class _$UpdateBeer implements UpdateBeer {
-  const _$UpdateBeer(
-      this.timestamp, this.beerId, this.name, this.productCode, this.price)
+  const _$UpdateBeer(this.timestamp, this.beerId, this.name, this.productCode,
+      this.price, this.photos)
       : assert(timestamp != null),
         assert(beerId != null),
         assert(name != null),
         assert(productCode != null),
-        assert(price != null);
+        assert(price != null),
+        assert(photos != null);
 
   factory _$UpdateBeer.fromJson(Map<String, dynamic> json) =>
       _$_$UpdateBeerFromJson(json);
@@ -567,10 +587,12 @@ class _$UpdateBeer implements UpdateBeer {
   final String productCode;
   @override
   final double price;
+  @override
+  final List<String> photos;
 
   @override
   String toString() {
-    return 'BeerEvent.updateBeer(timestamp: $timestamp, beerId: $beerId, name: $name, productCode: $productCode, price: $price)';
+    return 'BeerEvent.updateBeer(timestamp: $timestamp, beerId: $beerId, name: $name, productCode: $productCode, price: $price, photos: $photos)';
   }
 
   @override
@@ -588,7 +610,9 @@ class _$UpdateBeer implements UpdateBeer {
                 const DeepCollectionEquality()
                     .equals(other.productCode, productCode)) &&
             (identical(other.price, price) ||
-                const DeepCollectionEquality().equals(other.price, price)));
+                const DeepCollectionEquality().equals(other.price, price)) &&
+            (identical(other.photos, photos) ||
+                const DeepCollectionEquality().equals(other.photos, photos)));
   }
 
   @override
@@ -598,7 +622,8 @@ class _$UpdateBeer implements UpdateBeer {
       const DeepCollectionEquality().hash(beerId) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(productCode) ^
-      const DeepCollectionEquality().hash(price);
+      const DeepCollectionEquality().hash(price) ^
+      const DeepCollectionEquality().hash(photos);
 
   @override
   $UpdateBeerCopyWith<UpdateBeer> get copyWith =>
@@ -610,10 +635,10 @@ class _$UpdateBeer implements UpdateBeer {
     @required Result deleteBeer(int timestamp, int beerId),
     @required
         Result registerBeer(int timestamp, int id, String name,
-            String productCode, double price),
+            String productCode, double price, List<String> photos),
     @required
         Result updateBeer(int timestamp, int beerId, String name,
-            String productCode, double price),
+            String productCode, double price, List<String> photos),
     @required
         Result updateQuantity(int timestamp, int beerId, int quantityChange),
   }) {
@@ -621,23 +646,23 @@ class _$UpdateBeer implements UpdateBeer {
     assert(registerBeer != null);
     assert(updateBeer != null);
     assert(updateQuantity != null);
-    return updateBeer(timestamp, beerId, name, productCode, price);
+    return updateBeer(timestamp, beerId, name, productCode, price, photos);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result deleteBeer(int timestamp, int beerId),
-    Result registerBeer(
-        int timestamp, int id, String name, String productCode, double price),
+    Result registerBeer(int timestamp, int id, String name, String productCode,
+        double price, List<String> photos),
     Result updateBeer(int timestamp, int beerId, String name,
-        String productCode, double price),
+        String productCode, double price, List<String> photos),
     Result updateQuantity(int timestamp, int beerId, int quantityChange),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (updateBeer != null) {
-      return updateBeer(timestamp, beerId, name, productCode, price);
+      return updateBeer(timestamp, beerId, name, productCode, price, photos);
     }
     return orElse();
   }
@@ -681,7 +706,7 @@ class _$UpdateBeer implements UpdateBeer {
 
 abstract class UpdateBeer implements BeerEvent {
   const factory UpdateBeer(int timestamp, int beerId, String name,
-      String productCode, double price) = _$UpdateBeer;
+      String productCode, double price, List<String> photos) = _$UpdateBeer;
 
   factory UpdateBeer.fromJson(Map<String, dynamic> json) =
       _$UpdateBeer.fromJson;
@@ -692,6 +717,7 @@ abstract class UpdateBeer implements BeerEvent {
   String get name;
   String get productCode;
   double get price;
+  List<String> get photos;
   @override
   $UpdateBeerCopyWith<UpdateBeer> get copyWith;
 }
@@ -785,10 +811,10 @@ class _$UpdateQunatity implements UpdateQunatity {
     @required Result deleteBeer(int timestamp, int beerId),
     @required
         Result registerBeer(int timestamp, int id, String name,
-            String productCode, double price),
+            String productCode, double price, List<String> photos),
     @required
         Result updateBeer(int timestamp, int beerId, String name,
-            String productCode, double price),
+            String productCode, double price, List<String> photos),
     @required
         Result updateQuantity(int timestamp, int beerId, int quantityChange),
   }) {
@@ -803,10 +829,10 @@ class _$UpdateQunatity implements UpdateQunatity {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result deleteBeer(int timestamp, int beerId),
-    Result registerBeer(
-        int timestamp, int id, String name, String productCode, double price),
+    Result registerBeer(int timestamp, int id, String name, String productCode,
+        double price, List<String> photos),
     Result updateBeer(int timestamp, int beerId, String name,
-        String productCode, double price),
+        String productCode, double price, List<String> photos),
     Result updateQuantity(int timestamp, int beerId, int quantityChange),
     @required Result orElse(),
   }) {

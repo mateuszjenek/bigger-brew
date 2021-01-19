@@ -13,6 +13,7 @@ abstract class BeerDto with _$BeerDto {
     @required String productCode,
     @required double price,
     @required int quantity,
+    @required List<String> photos,
   }) = _BeerDto;
 
   factory BeerDto.fromDomain(Beer beer) => BeerDto(
@@ -21,6 +22,7 @@ abstract class BeerDto with _$BeerDto {
         productCode: beer.productCode.getOrCrash(),
         price: beer.price.getOrCrash(),
         quantity: beer.quantity.getOrCrash(),
+        photos: beer.photos,
       );
 
   factory BeerDto.fromJson(Map<String, dynamic> json) =>
@@ -35,6 +37,7 @@ extension BeerDtoX on BeerDto {
       productCode: ProductCode(productCode),
       quantity: Quantity(quantity),
       price: Price(price),
+      photos: photos,
     );
   }
 }

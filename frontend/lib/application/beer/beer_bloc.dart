@@ -59,7 +59,7 @@ class BeerBloc extends Bloc<BeerEvent, BeerState> {
       updateBeer: (e) async* {
         yield state.copyWith(isUpdating: true);
         var result = await repository.updateBeer(
-            state.beer.id.getOrCrash(), e.name, e.code, e.price);
+            state.beer.id.getOrCrash(), e.name, e.code, e.price, e.photos);
         yield result.value.fold(
           (_) => state.copyWith(
             isUpdating: false,

@@ -11,5 +11,6 @@ abstract class Beer with _$Beer {
     @required ProductCode productCode,
     @required Quantity quantity,
     @required Price price,
+    @required List<String> photos,
   }) = _Beer;
 }
